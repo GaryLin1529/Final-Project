@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黃金屋書店</title>
+    <link rel="stylesheet" href="MainPage.css">
+    <style>
+        @import url("slideAD.css");
+    </style>
+
+</head>
+<body>
+    <!--前導主頁-->
+    <header class="header">
+        <!--按Logo回主頁-->
+        <a href="MainPage.html" class="logo"><img class="header-logo" src="image/logo.png"/></a>
+
+        <!--搜尋欄-->
+        <div class="SearchBar_container">
+            <form action="" class="SearchBar">
+                <input type="text" placeholder="搜尋..." name="question">
+                <button type="submit"><img src="image/search.png"></button>
+            </form>
+        </div>
+
+        <nav class="navbar">
+            <a href="#" class="active">主頁面</a>
+            <a href="#">文學書</a>
+            <a href="#">工具書</a>
+            <a href="#">帳戶</a>
+        </nav>
+
+    </header>
+
+<section class="home">
+    <div class="home-content">
+        <h1>黃金屋書店</h1>
+        <h3>書中尋影 屋中尋歸</h3>
+        <p>我們希望您能在書店裡找到心之所歸，在書中尋到伊人之影</p>
+        <div class="btn-box">
+            <a href="#">了解我們</a>
+            <a href="#">給予評價</a>
+        </div>
+    </div>
+
+    <div class="home-sci">
+        <a href="#"></a>
+        <a href="#"></a>
+        <a href="#"></a>
+    </div>
+</section>
+
+    <!--滾動式廣告-->
+<div class="slideshow-container">
+    <div class="singleslide fade">
+        <img
+        src="image/The Stranger.jpg"
+        style="width: 100%;"
+        />
+        <div class="text">新品推出!!! 異鄉人(卡謬版書衣)</div>
+    </div>
+
+    <div class="singleslide fade">
+        <img
+        src="image/Way of the peaceful warrior a book that changes lives.jpg"
+        style="width: 100%;"
+        />
+        <div class="text">新品推出!!! 深夜加油站遇見蘇格拉底</div>
+    </div>
+
+    <div class="singleslide fade">
+        <img
+        src="image/Le Petit Prince.jpg"
+        style="width: 100%;"
+        />
+        <div class="text">新品推出!!! 小王子</div>
+    </div>
+
+    <!--響應式按鈕-->
+    <button class="prev" onclick="plusSlides(-1)">《</button>
+    <button class="next" onclick="plusSlides(1)">》</button>
+
+</div>
+    <!--/滾動式廣告-->
+
+    <!--javascipt 引入-->
+    <script src="slideAD.js"></script>
+
+    <!--前導主頁-->
+
+
+</body>
+</html> 
