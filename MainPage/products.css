@@ -1,0 +1,27 @@
+* {
+    padding: 0px;
+    margin: 0px;
+}
+
+.item_img img {
+    width: 100%;
+}
+
+.item {
+    padding: 0px 5px;
+}
+
+.array {
+    width: 960px;
+    display: flex;
+}
+
+.text_cost {
+    display: flex;
+    justify-content: space-between;
+}
+
+.ctr_array {
+    display: flex;
+    justify-content: center;
+}
