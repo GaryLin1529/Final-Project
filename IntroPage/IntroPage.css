@@ -1,0 +1,159 @@
+/*字體 (可更改)*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/*背景顏色*/
+body {
+    background: #081b29;
+    color: #ededed;
+
+}
+
+/*網頁標頭樣式*/
+.header {
+    /*使元素固定，即使滾動頁面也不會變位置*/
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 20px 10%;
+    /*透明背景*/
+    background: transparent;
+    /*建立一個flex容器*/
+    display: flex;
+    /*為flex屬性之一，可將元素均勻擺在容器空間中*/
+    justify-content: space-between;
+    /*使元素在容器中的XY軸上置中*/
+    align-items: center;
+    /*z-index是疊層概念 數字越大疊層越上面*/
+    z-index: 100;
+}
+
+.logo {
+    font-size: 25px;
+    color: #ededed;
+    text-decoration: none;
+    font-weight: 600px;
+}
+
+.navbar a {
+    font-size: 18px;
+    color: #ededed;
+    text-decoration: none;
+    font-weight: 500px;
+    margin-left: 35px;
+    transition: .3s;
+}
+
+
+/* hover是判斷鼠標有無點上去*/
+/*鼠標懸停(hover)在「navbar("a元素")」上時的樣式，*/
+.navbar a:hover,
+/*當.navbar的連結被標記為active(當前選擇or打開的頁面)時的樣式*/
+.navbar a.active {
+    color: #00abf0;
+}
+
+.home {
+    /*vh是單位，指的是與螢幕視窗的相對高度，例如height: 50vh; 就是元素高度為視窗高度的一半*/
+    /*寬度是vw*/
+    height: 100vh;
+    width: 60vw;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    padding: 0 10%;
+}
+
+.home-content {
+    /*max-width 元素的最大寬度*/
+    max-width: 600px;
+}
+
+.home-content h1 {
+    font-size: 56px;
+    font-weight: 700px;
+    /*line-height的單位若沒有設定就是字體大小的倍數*/
+    line-height: 1.2;
+}
+
+.home-content h3 {
+    font-size: 32px;
+    font-weight: 700px;
+    color: #00abf0;
+}
+
+.home-content p {
+    font-size: 16px;
+    margin: 20px 0 40px;
+}
+
+.home-content .btn-box {
+    display: flex;
+    justify-content: space-between;
+    width: 345px;
+    height: 50px;
+}
+
+.btn-box a {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 100%;
+    background: #00abf0;
+    border: 2px solid #00abf0;
+    border-radius: 8px;
+    font-size: 19px;
+    color: #081b29;
+    text-decoration: none;
+    font-weight: 600px;
+    letter-spacing: 1px;
+    z-index: 1;
+    /*將溢出邊框外的紅色隱藏掉*/
+    overflow: hidden;
+    /*transition是用來指定過渡效果的屬性，.5s指的是改變元素的屬性時的過渡效果時間(0.5秒)*/
+    transition: .5s;
+}
+
+.btn-box a:hover {
+    color: #00abf0;
+}
+
+.btn-box a:nth-child(2) {
+    background: transparent;
+    color: #00abf0;
+}
+
+.btn-box a:nth-child(2):hover {
+    color: #081b29;
+}
+
+.btn-box a:nth-child(2)::before {
+    background: #00abf0;
+}
+
+.btn-box a::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 0px;
+    height: 100%;
+    background: #081b29;
+    z-index: -1;
+    /*transition是用來指定過渡效果的屬性，.5s指的是改變元素的屬性時的過渡效果時間(0.5秒)*/
+    transition: .5s;
+}
+
+.btn-box a:hover::before {
+    width: 100%;
+}
