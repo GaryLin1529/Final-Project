@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> test 1 </title>
+    <link rel="stylesheet" href="IntroPage.css">
+    <style>
+        @import url("slideAD.css");
+    </style>
+
+</head>
+<body>
+    <header class="header">
+        <!--按Logo回主頁-->
+        <a href="IntroPage.html" class="logo">Jacob.</a>
+
+        <nav class="navbar">
+            <a href="#" class="active">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Portfolio</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+<section class="home">
+    <div class="home-content">
+        <h1>Hi, I'm Jacob Aiden</h1>
+        <h3>Frontend Developer</h3>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique velit magni possimus labore nihil amet! Reiciendis architecto repellendus eos ratione totam aspernatur ab sunt. Dolore, cum sed.</p>
+        <div class="btn-box">
+            <a href="#">Hire Me</a>
+            <a href="#">Let's talk</a>
+        </div>
+    </div>
+
+    <div class="home-sci">
+        <a href="#"></a>
+        <a href="#"></a>
+        <a href="#"></a>
+    </div>
+</section>
+
+    <!--滾動式廣告-->
+<div class="slideshow-container">
+    <div class="singleslide fade">
+        <img
+        src="image/book(1).jpg"
+        style="width: 100%;"
+        />
+        <div class="text">新品推出! 異鄉人(卡謬版書衣)</div>
+    </div>
+
+    <div class="singleslide fade">
+        <img
+        src="image/IMG_6739.jpg"
+        style="width: 100%;"
+        />
+        <div class="text">新品推出! 異鄉人(卡謬版書衣)</div>
+    </div>
+
+    <div class="singleslide fade">
+        <img
+        src="image/book(1).jpg"
+        style="width: 100%;"
+        />
+        <div class="text">新品推出! 異鄉人(卡謬版書衣)</div>
+    </div>
+
+    <!--響應式按鈕-->
+    <button class="prev" onclick="plusSlides(-1)">《</button>
+    <button class="next" onclick="plusSlides(1)">》</button>
+
+</div>
+    <!--/滾動式廣告-->
+
+    <!--javascipt 引入-->
+    <script src="slideAD.js"></script>
+
+</body>
+</html> 
