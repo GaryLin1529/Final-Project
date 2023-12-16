@@ -31,7 +31,7 @@ body {
     /*使元素在容器中的XY軸上置中*/
     align-items: center;
     /*z-index是疊層概念 數字越大疊層越上面*/
-    z-index: 100;
+    z-index: 10;
 }
 
 .header-logo {

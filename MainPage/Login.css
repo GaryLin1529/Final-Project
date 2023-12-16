@@ -16,6 +16,7 @@
     overflow: hidden;
     transform: scale(0);
     transition: transform .5s ease, height .2s ease;
+    z-index: 20;
 }
 
 .wrapper.active-popup {
@@ -97,7 +98,6 @@
     transform: translateY(-50%);
     font-size: 1em;
     color: #00abf0;
-
     font-weight: 500;
     pointer-events: none;
     transition: .5s;
