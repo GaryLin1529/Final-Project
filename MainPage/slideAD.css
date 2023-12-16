@@ -1,17 +1,9 @@
-body {
-    margin: 0;
-    display: flex;
-}
-
 /*最外層的div包起來*/
 .slideshow-container {
     width: 500px;
     position: relative;
     margin: auto;
-}
-
-.singleslide {
-    display: flex;
+    margin-left: 5%;
 }
 
 img {

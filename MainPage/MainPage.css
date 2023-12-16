@@ -12,7 +12,6 @@
 body {
     background: #081b29;
     color: #ededed;
-
 }
 
 /*網頁標頭樣式*/
@@ -33,7 +32,6 @@ body {
     align-items: center;
     /*z-index是疊層概念 數字越大疊層越上面*/
     z-index: 100;
-
 }
 
 .header-logo {
@@ -163,20 +161,21 @@ body {
 }
 
 .home {
+    display: flex;
+    align-items: center;
+    background-position: center;
+    justify-content: center;
+    /* 讓元素的高度占滿整個視窗 好讓他們可以下來*/
+    position: relative;
     /*vh是單位，指的是與螢幕視窗的相對高度，例如height: 50vh; 就是元素高度為視窗高度的一半*/
     /*寬度是vw*/
     height: 100vh;
-    width: 60vw;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    align-items: center;
-    padding: 0 10%;
 }
 
 .home-content {
-    /*max-width 元素的最大寬度*/
-    max-width: 600px;
+    /*文案樣式*/
+    width: 60%;
+    padding: 13%;
 }
 
 .home-content h1 {
@@ -220,7 +219,7 @@ body {
     font-weight: 600px;
     letter-spacing: 1px;
     z-index: 1;
-    /*將溢出邊框外的紅色隱藏掉*/
+    /*將溢出邊框外的顏色隱藏掉*/
     overflow: hidden;
     /*transition是用來指定過渡效果的屬性，.5s指的是改變元素的屬性時的過渡效果時間(0.5秒)*/
     transition: .5s;
