@@ -4,7 +4,7 @@ function showslides(props) {
   let i;
   //取得所有slides 因是取class 非id 故用getElementsByClassName
   let slides = document.getElementsByClassName("singleslide");
-
+  
   //如果n大於slide的長度，表示已經到最後一張，要回到第一章開始播
   if (props > slides.length){
     slideIndex = 1;

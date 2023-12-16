@@ -6,10 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>黃金屋書店</title>
     <link rel="stylesheet" href="MainPage.css">
-    <link rel="stylesheet" href="products.css">
     <style>
         @import url("slideAD.css");
     </style>
+    <link rel="stylesheet" href="products.css">
 
 </head>
 <body>
@@ -28,7 +28,7 @@
 
         <nav class="navbar">
                 <a href="#" class="active">主頁面</a>
-                <a href="#">文學書</a>
+                <a href="#TheBook1">文學書</a>
                 <a href="#">工具書</a>
                 <button class="btnLogin-popup">登入</button>
         </nav>
@@ -103,7 +103,7 @@
 
 <!--資訊-->
 
-<section class="home">
+<div class="home">
     <div class="home-content">
         <h1>黃金屋書店</h1>
         <h3>書中尋影 屋中尋歸</h3>
@@ -119,12 +119,11 @@
         <a href="#"></a>
         <a href="#"></a>
     </div>
-</section>
 
-    <!--滾動式廣告-->
+        <!--滾動式廣告-->
 <div class="slideshow-container">
     <div class="singleslide fade">
-        <img
+        <img     
         src="image/The Stranger.jpg"
         style="width: 100%;"
         />
@@ -151,12 +150,15 @@
     <button class="prev" onclick="plusSlides(-1)">《</button>
     <button class="next" onclick="plusSlides(1)">》</button>
 
-</div>
-    <!--/滾動式廣告-->
-
     <!--javascipt 引入-->
     <script src="slideAD.js"></script>
-    
+</div>
+</div>
 
+    <!--主商品頁-->
+    <section id="TheBook1" class="product1">
+        <h2>文學類書籍</h2>
+
+    </section>
 </body>
 </html> 
