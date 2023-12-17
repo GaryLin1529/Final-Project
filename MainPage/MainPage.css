@@ -21,7 +21,7 @@ body {
     top: 0px;
     left: 0px;
     width: 100%;
-    padding: 20px 10%;
+    padding: 5px 10%;
     /*透明背景*/
     background: transparent;
     /*建立一個flex容器*/
@@ -32,6 +32,19 @@ body {
     align-items: center;
     /*z-index是疊層概念 數字越大疊層越上面*/
     z-index: 10;
+    /*發現往下滑時商品會擋住header 故加一點模糊顏色*/
+    background: rgba(8, 27, 41, 0.7);
+    backdrop-filter: blur(4px) saturate(120%);
+    /*同上問題 解決後覺得header出現與消失的動畫太生硬 因此加入淡入淡出效果*/
+    /*淡入淡出的過渡效果，時間為 0.3 秒，使用 ease 函數 */
+    transition: opacity 0.3s ease;
+    /*在頁面最頂端時不透明度為 1，即完全顯示 */
+    opacity: 1;
+}
+
+.header.hidden {
+    opacity: 0;
+    /* 隱藏時的不透明度為 0，即完全透明 */
 }
 
 .header-logo {
