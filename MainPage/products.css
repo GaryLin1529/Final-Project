@@ -1,3 +1,78 @@
-.product1 {
-    display: block;
+.product {
+    text-align: center;
+
+}
+
+.pro-container {
+    display: flex;
+    /*因為瀏覽器右邊會有滑桿 會遮擋住[點亮陰影]的特效 故要限制最大寬度*/
+    max-width: 99%;
+    justify-content: space-between;
+    padding-top: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 5%;
+}
+
+.pro {
+    width: 23%;
+    min-width: 250px;
+    padding: 10px 12px;
+    border: 1px solid #cce7d0;
+    border-radius: 25px;
+    cursor: pointer;
+    /*box-shadow是陰影，當下面的hover實現時會將陰影點亮*/
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
+    /*點亮陰影時有淡入淡出的效果 讓整個效果更smooth*/
+    transition: 0.2s ease;
+    position: relative;
+    margin-bottom: 5%;
+}
+
+.pro:hover {
+    /*鼠標點上去的時候會有一個點亮陰影的效果*/
+    box-shadow: 10px 10px;
+}
+
+.pro img {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.pro .des {
+    text-align: start;
+    padding: 10px 0;
+}
+
+.pro .des span {
+    color: #d2d2d2;
+    font-size: 12px;
+}
+
+.pro .des h5 {
+    padding-top: 7px;
+    font-size: 14px;
+}
+
+.pro .des i {
+    font-size: 12px;
+    color: rgb(243, 181, 25);
+}
+
+.pro .des h4 {
+    padding-top: 7px;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.pro .cart {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50px;
+    background-color: #e8f6ea;
+    color: #154542;
+    border: 1px solid #cce7d0;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
 }
