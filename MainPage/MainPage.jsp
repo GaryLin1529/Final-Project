@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.util.Arrays" %>
+<%@ page import="java.sql.*" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +23,11 @@
             text-align: center;
         }
     </style>
+    <script>
+        function showResult(message) {
+            document.getElementById("loginResult").innerHTML = message;
+        }
+    </script>
 </head>
 <body>
     <!--前導主頁-->
@@ -55,16 +61,16 @@
     </span>
 
     <div class="form-box login">
-        <h2>登入</h2>
-        <form action="#">
+        <h2>登入</h2> 
+        <form action="LoginSQL.jsp" method="post"> <!-- 將資料引導到 LoginSQL.jsp 做回覆 -->
             <div class="input-box">
                 <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                <input type="email" onfocus="this.style.color='#ffff'" required>
+                <input type="email" id="email" name="email" onfocus="this.style.color='#ffff'" required>
                 <label>帳號(email)</label>
             </div> 
             <div class="input-box">
                 <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                <input type="password" onfocus="this.style.color='#ffff'" required>
+                <input type="password" id="password" name="password" onfocus="this.style.color='#ffff'" required>
                 <label>密碼</label>
             </div>  
             <div class="remeber-forget">
@@ -80,22 +86,27 @@
 
     <div class="form-box register">
         <h2>註冊</h2>
-        <form action="#">
+        <form action="RegisterSQL.jsp"> <!-- 將資料引導到 RegisterSQL.jsp 做回覆 -->
             <div class="input-box">
-                <span class="icon"><ion-icon name="person"></ion-icon></span>
-                <input type="text" onfocus="this.style.color='#ffff'" required>
+                <span class="icon"><ion-icon name="username"></ion-icon></span>
+                <input type="text" id="username" name="username" onfocus="this.style.color='#ffff'" required>
                 <label>使用者名稱</label>
             </div>
             <div class="input-box">
-                <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                <input type="email" onfocus="this.style.color='#ffff'" required>
+                <span class="icon"><ion-icon name="email"></ion-icon></span>
+                <input type="email" id="email" name="email" onfocus="this.style.color='#ffff'" required>
                 <label>帳號(Email)</label>
             </div> 
             <div class="input-box">
                 <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                <input type="password" onfocus="this.style.color='#ffff'" required>
+                <input type="password" id="password" name="password" onfocus="this.style.color='#ffff'" required>
                 <label>密碼</label>
             </div>  
+            <div class="input-box">
+                <span class="icon"><ion-icon name="phoneNumber"></ion-icon></span>
+                <input type="text" id="phoneNumber" name="phoneNumber" onfocus="this.style.color='#ffff'" required>
+                <label>手機號碼</label>
+            </div> 
             <div class="remeber-forget">
                 <label><input type="checkbox">我同意隱私條款</label>
             </div>
@@ -606,5 +617,52 @@
         <h3 class="center-text">您是第 <%= counter %> 位訪客</h3>
         
 </div>
+
+<!-- 資料庫連結 - 會員部分 -->
+
+<!--
+<%
+    try {
+        // 載入資料庫驅動程式
+        Class.forName("com.mysql.cj.jdbc.Driver");
+
+        // 資料庫連接URL
+        String url = "jdbc:mysql://localhost:3306/transactionthing";
+        String username = "root";
+        String password = "8970";
+
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+            // 建立Statement對象
+            try (Statement stmt = conn.createStatement()) {
+                // 執行SQL查詢
+                String sql = "SELECT * FROM membership";
+                try (ResultSet rs = stmt.executeQuery(sql)) {
+
+                    // 列印查詢結果
+                    out.println("<h2>Book List:</h2>");
+                    out.println("<table border='1'>");
+                    out.println("<tr><th>ID</th><th>Title</th><th>Author</th><th>Price</th></tr>");
+
+                    while (rs.next()) {
+                        out.println("<tr>");
+                        out.println("<td>" + rs.getInt("id") + "</td>");
+                        out.println("<td>" + rs.getString("title") + "</td>");
+                        out.println("<td>" + rs.getString("author") + "</td>");
+                        out.println("<td>" + rs.getDouble("price") + "</td>");
+                        out.println("</tr>");
+                    }
+
+                    out.println("</table>");
+                }
+            }
+        } catch (Exception e) {
+            out.println("Error: " + e.getMessage());
+        }
+    } catch (ClassNotFoundException e) {
+        out.println("class錯誤" + e.toString());
+    }
+%>
+-->
+
 </body>
 </html> 
