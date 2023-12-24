@@ -1,9 +1,8 @@
 .product {
     text-align: center;
-
 }
 
-.pro-container {
+.pro_container {
     display: flex;
     /*因為瀏覽器右邊會有滑桿 會遮擋住[點亮陰影]的特效 故要限制最大寬度*/
     max-width: 99%;
@@ -11,6 +10,24 @@
     padding-top: 20px;
     flex-wrap: wrap;
     margin-bottom: 5%;
+}
+
+.pro_content {
+    opacity: 0;
+    transition: opacity 0.7s;
+    padding-top: 10%;
+}
+
+.partial-fade {
+    opacity: 0.7;
+    transform: translateY(-100px);
+    transition: opacity 0.5s, transform 0.5s;
+    margin-top: 100px;
+}
+
+.partial-fade-out {
+    opacity: 0 !important;
+    transform: translateY(30px);
 }
 
 .pro {
@@ -23,7 +40,7 @@
     /*box-shadow是陰影，當下面的hover實現時會將陰影點亮*/
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
     /*點亮陰影時有淡入淡出的效果 讓整個效果更smooth*/
-    transition: 0.2s ease;
+    transition: 0.5s ease;
     position: relative;
     margin-bottom: 5%;
 }

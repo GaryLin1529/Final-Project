@@ -3,6 +3,7 @@
     background: #081b29;
     display: flex;
     justify-content: center;
+    margin-top: 9%;
 }
 
 .Us_header {
@@ -30,33 +31,12 @@
     transition: 0.4s;
     box-sizing: border-box;
     position: relative;
-    transform-style: preserve-3d;
     /* 保留3D效果 */
+    transform-style: preserve-3d;
 }
 
 .teams:hover {
     transform: rotateY(180deg);
-}
-
-.card-face,
-.card-back {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    transform-origin: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.card-back {
-    background-color: blue;
-    color: white;
-    transform: rotateY(180deg);
-    /* 初始狀態是翻轉180度，讓正面先顯示 */
 }
 
 .teams img {
@@ -110,4 +90,26 @@
     margin-top: auto;
     text-align: right;
     padding: 10px;
+}
+
+/*卡片背面*/
+.card_face,
+.card_back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    transform-origin: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card_back {
+    background-color: #102f45;
+    color: white;
+    transform: rotateY(180deg);
+    /* 初始狀態是翻轉180度，讓正面先顯示 */
 }
