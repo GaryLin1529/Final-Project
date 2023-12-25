@@ -58,7 +58,7 @@ CREATE TABLE `membership` (
   `MemberAccount` varchar(45) NOT NULL,
   `MemberPhone` int NOT NULL,
   PRIMARY KEY (`MemberID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,7 +67,7 @@ CREATE TABLE `membership` (
 
 LOCK TABLES `membership` WRITE;
 /*!40000 ALTER TABLE `membership` DISABLE KEYS */;
-INSERT INTO `membership` VALUES (1,'11144209','JayPan','JayPan@gmail.com',955889701),(2,'11144239','Mina','Mina@gmail.com',985476321),(3,'11144275','Nathania','Nathania@gmail.com',957236589),(4,'11144101','John','John@gmail.com',966588970),(5,'11144201','Roy','Roy@gmail.com',988477563),(6,'11144301','Yale','Yale@gmail.com',974266581),(7,'11144501','Hank','Hank@gmail.com',974266873),(8,'11144601','Paul','Paul@gmail.com',984522307);
+INSERT INTO `membership` VALUES (1,'11144209','JayPan','JayPan@gmail.com',955889701),(2,'11144239','Mina','Mina@gmail.com',985476321),(3,'11144275','Nathania','Nathania@gmail.com',957236589);
 /*!40000 ALTER TABLE `membership` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -79,13 +79,13 @@ DROP TABLE IF EXISTS `supplier`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `supplier` (
-  `ProductID` int NOT NULL,
+  `SupplierID` int NOT NULL,
   `SupplierName` varchar(45) NOT NULL,
   `SupplierAddress` varchar(45) NOT NULL,
   `SupplierPhone` int NOT NULL,
   `SupplierContactPerson` varchar(45) NOT NULL,
   `Tax ID` int NOT NULL,
-  PRIMARY KEY (`ProductID`)
+  PRIMARY KEY (`SupplierID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -137,4 +137,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-23 23:51:18
+-- Dump completed on 2023-12-25 17:04:46
