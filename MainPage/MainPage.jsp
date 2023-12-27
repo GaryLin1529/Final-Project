@@ -12,26 +12,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
     <title>黃金屋書店</title>
     <link rel="stylesheet" href="CSS/MainPage.css">
-    
     <style>
         @import url("CSS/slideAD.css");
     </style>
-
     <link rel="stylesheet" href="CSS/products.css">
     <link rel="stylesheet" href="CSS/AboutUs.css">
-
-    <script>
-        function showResult(message) {
-            document.getElementById("loginResult").innerHTML = message;
-        }
-    </script>
-
 </head>
 <body>
     <!--前導主頁-->
     <header class="header">
         <!--按Logo回主頁-->
-        <a href="MainPage.jsp" class="logo"><img class="header-logo" src="image/logo.png"/></a>
+        <a href="MainPage.html" class="logo"><img class="header-logo" src="image/logo.png"/></a>
         
         <!--搜尋欄-->
         <div class="SearchBar_container">
@@ -42,8 +33,8 @@
         </div>
 
         <nav class="navbar">
-                <a href="#home" class="active">主頁面</a>
-                <a href="Shopping Interface/ShoppingInterface.html">購物車</a>
+                <a href="#home" class="active"\>主頁面</a>
+                <a href="">購物車</a>
                 
         <div class="dropdown">
             <button class="dropbtn">
@@ -54,7 +45,6 @@
                     <a href="#Educational">工具書</a>
             </div>
         </div>
-
                 <button class="btnLogin-popup">登入</button>
         </nav>
 
@@ -106,35 +96,34 @@
                     if (conn != null) conn.close();
                 }
             }
-
         %>
 
-        <div class="form-box login">
-            <h2>登入</h2>
-            <form action="MainPage.jsp" method="post"> <!-- 重新導引到MainPage.jsp做回覆 -->
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                    <input type="email" id="email" name="email" onfocus="this.style.color='#ffff'" required>
-                    <label>帳號(email)</label>
-                </div> 
-                <div class="input-box">
-                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                    <input type="password" id="password" name="password" onfocus="this.style.color='#ffff'" required>
-                    <label>密碼</label>
-                </div>  
-                <div class="remeber-forget">
-                    <label><input type="checkbox">記住我的帳密</label>
-                    <a href="#">忘記密碼</a> <!-- 需要撰寫 -->
-                </div>
-                <button type="submit" class="btn">登入</button>
-                <div class="login-register">
-                    <p>沒有帳號?&nbsp;<a href="#" class="register-link">註冊</a></p>
-                </div>
-            </form>
-            <% if (!message.isEmpty()) { %>
+    <div class="form-box login">
+        <h2>登入</h2>
+        <form action="MainPage-1.jsp">
+            <div class="input-box">
+                <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                <input type="email" onfocus="this.style.color='#ffff'" required>
+                <label>帳號(email)</label>
+            </div> 
+            <div class="input-box">
+                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                <input type="password" onfocus="this.style.color='#ffff'" required>
+                <label>密碼</label>
+            </div>  
+            <div class="remeber-forget">
+                <label><input type="checkbox">記住我的帳密</label>
+                <a href="#">忘記密碼</a>
+            </div>
+            <input class="btn" type="submit"  value="登入" onclick="location.href='../MainPage Logged in/MainPage.html'"></button>
+            <div class="login-register">
+                <p>沒有帳號?&nbsp;<a href="#" class="register-link">註冊</a></p>
+            </div>
+        </form>
+        <% if (!message.isEmpty()) { %>
                 <p><%= message %></p>
-            <% } %>
-        </div>
+        <% } %>
+    </div>
 
     <%
     String RegisterUsername = request.getParameter("username");
@@ -184,7 +173,7 @@
 
     <div class="form-box register">
         <h2>註冊</h2>
-        <form action="MainPage.jsp"> <!-- 重新導引到MainPage.jsp做回覆 -->
+        <form action="MainPage-1.jsp">
             <div class="input-box">
                 <span class="icon"><ion-icon name="person"></ion-icon></span>
                 <input type="text" id="username" name="username" onfocus="this.style.color='#ffff'" required>
@@ -204,7 +193,7 @@
                 <span class="icon"><ion-icon name="phoneNumber"></ion-icon></span>
                 <input type="text" id="phoneNumber" name="phoneNumber" onfocus="this.style.color='#ffff'" required>
                 <label>手機號碼</label>
-            </div>   
+            </div>    
             <div class="remeber-forget">
                 <label><input type="checkbox">我同意隱私條款</label>
             </div>
@@ -234,7 +223,7 @@
         <p>我們希望您能在書店裡找到心之所歸，在書中尋到伊人之影</p>
         <div class="btn-box">
             <a href="#team">了解我們</a>
-            <a href="#rating">給予評價</a>
+            <a href="rating history/rating.html">給予評價</a>
         </div>
     </div>
 
@@ -630,16 +619,18 @@
     <div class="sub_container">
         <!--林彥儒-->
         <div class="teams">
-            <img src="image/test.png" height="100px" alt="">
-            <div class="name">Esmay Stace</div>
-            <div class="design">Developer</div>
-            <div class="about">Lorem ipsum dolor sit amet.</div>
+            <img src="image/Gary.jpg" height="100px" alt="">
+            <div class="name">林彥儒</div>
+            <div class="design">11144157</div>
 
             <div class="card_back">
                 <div class="back_content">
-                    <img src="image/test.png" alt="">
+                    <img src="image/Gary.jpg" alt="">
                     <h2>心得</h2>
-                    <p>在這裡寫下你想說的內容。</p>
+                    <p>網程我覺得算是我學過的語言裡最有心得的，因為可以馬上看到成果如何，而且很多動畫成功研究出來後看到它真的成功在動會很感動。
+                        我能在其中找到樂趣還有一個原因要感謝前端的組員們，我們的分工模式跟定時一起上DC討論的時間讓我們的工作可以算是有條不紊地在進行，
+                        研究出新功能的時候大家也都很開心，在其中我也學到了要善用各種資源，我以前覺得用ChatGPT會讓我太依賴它，但在這次專案中我卻發現善加利用
+                        是可以從中學到很多東西的，還有網路中的大神或者生活裡的細節也都會給我設計網頁帶來很多新想法跟靈感，總之這次的專案我寫的蠻開心的。</p>
                     <div class="social_media">
                         <a href="https://www.facebook.com/gary.lin.0925/?locale=zh_TW"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.instagram.com/yr._.1529/"><i class="fab fa-instagram"></i></a>
@@ -649,26 +640,111 @@
             </div>
         </div>
 
-        <!---->
+        <!--吳宗儒-->
 
         <div class="teams">
-            <img src="image/test.png" height="100px" alt="">
-            <div class="name">Esmay Stace</div>
-            <div class="design">Developer</div>
-            <div class="about">Lorem ipsum dolor sit amet.</div>
+            <img src="image/lulu.jpg" height="100px" alt="">
+            <div class="name">吳宗儒</div>
+            <div class="design">11144144</div>
             <div class="card_back">
                 <div class="back_content">
-                    <img src="image/test.png" alt="">
+                    <img src="image/lulu.jpg" alt="">
                     <h2>心得</h2>
-                    <p>在這裡寫下你想說的內容。</p>
+                    <p>藉由這次的專題製作讓我學到很多東西，因為有些東西我是從網路上學到的，讓我發現很多東西其實網路上有更好的做法。
+                        還有一點是要善用AI，出現問題無法解決時去問問cahtgpt，他會有很大的機率可以知道你的錯誤在那裡，這算是我覺得可以快速Debug的方式之一。</p>
                     <div class="social_media">
-                        <a href="https://www.facebook.com/gary.lin.0925/?locale=zh_TW"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/yr._.1529/"><i class="fab fa-instagram"></i></a>
-                        <a href="https://github.com/GaryLin1529"><i class="fab fa-github"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=100010789622587&locale=zh_TW"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/rem_lulu0202/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/luluremwu"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!--林孟威-->
+        <div class="teams">
+            <img src="image/william.jpg" height="100px" alt="">
+            <div class="name">林孟威</div>
+            <div class="design">11144175</div>
+
+            <div class="card_back">
+                <div class="back_content">
+                    <img src="image/william.jpg" alt="">
+                    <h2>心得</h2>
+                    <p>雖然我在前端群組裡面是唯一的外籍生，我覺得我們組合作得非常好。
+                        其實我在線上開會中我沒有講很多話，我們還能一起解決問題，面對困難, 並每個人都完成了自己的工作。我對這次群組非常滿意。</p>
+                    <div class="social_media">
+                        <a href="https://www.facebook.com/profile.php?id=100073395692358"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/williamnthn/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/wewey20"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--陳昕妤-->
+        <div class="teams">
+            <img src="image/Mina.jpg" height="100px" alt="">
+            <div class="name">陳昕妤</div>
+            <div class="design"> 11144239</div>
+
+            <div class="card_back">
+                <div class="back_content">
+                    <img src="image/Mina.jpg" alt="">
+                    <h2>心得</h2>
+                    <p>這堂課對我來說是一堂很值得紀念的課程，因為除了吸收老師教的知識外也要有辦法實際上手操作，這對我來說非常不簡單，在和組員溝通的過程中發現，學習的領域不一樣在構通和合作上也會有理解落差。
+                        和大家一起克服困難是一件很有成就感的事情，團隊的大家也變得對彼此更加熟悉，對專案的流程有了深刻的了解，意外的是我挺喜歡這種合作氛圍，或許我會繼續朝這個方向前進。</p>
+                    <div class="social_media">
+                        <a href="https://www.facebook.com/profile.php?id=100043167039166&mibextid=ZbWKwL"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/mina0127my?igsh=MTBsNjYwdnJrZ3d2MQ=="><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/miku0520925"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--潘秀玉-->
+        <div class="teams">
+            <img src="image/Nathania.jpg" height="100px" alt="">
+            <div class="name">潘秀玉</div>
+            <div class="design">11144275</div>
+
+            <div class="card_back">
+                <div class="back_content">
+                    <img src="image/Nathania.jpg" alt="">
+                    <h2>心得</h2>
+                    <p>這是我第一次做合作專案。我認為這確實是一個很大的挑戰，但儘管如此，我從這個專案中學到了很多東西，尤其是團隊合作。
+                        我希望透過這次合作，我們能夠吸收經驗，在未來做得更好。 可以看看我們的網站喔！</p>
+                    <div class="social_media">
+                        <a href="https://www.instagram.com/v.nathaniaindira_?igsh=ajdsdnkxdXRwOXp1"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=100009703032840&mibextid=ZbWKwL"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/nnatt0218"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--潘驄杰-->
+        <div class="teams">
+            <img src="image/Jay.png" height="100px" alt="">
+            <div class="name">潘驄杰</div>
+            <div class="design">11144209</div>
+
+            <div class="card_back">
+                <div class="back_content">
+                    <img src="image/Jay.png" alt="">
+                    <h2>心得</h2>
+                    <p>網程專案是對我們而言是一個挑戰，因為要完成一個專案，除了專業能力之外，更要進行團隊管理、專案進度管理、前後端協作方法等等的難題。
+                        而我相信，我們藉由走完這些刻苦的路之後，會更有專案製作、協作經驗，進而後續可以挑戰更大的項目，或者成為後續的養分！使專案製作不再成為百般困難的難事，可以成為一種喜歡的工作！</p>
+                    <div class="social_media">
+                        <a href="https://www.facebook.com/profile.php?id=100010854546067"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/jaypan1206/"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/Pan8732965"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     
