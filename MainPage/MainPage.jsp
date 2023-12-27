@@ -61,9 +61,10 @@
         <%
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String message = "";
+            String message = null;
+            boolean isLoggedIn = false;
 
-            if (email != null && password != null && !email.isEmpty() && !password.isEmpty()) {
+            if (email != null && password != null && !email.trim().isEmpty() && !password.trim().isEmpty()) {
                 Connection conn = null;
                 PreparedStatement pstmt = null;
                 ResultSet rs = null;
@@ -84,46 +85,55 @@
                     rs = pstmt.executeQuery();
 
                     if (rs.next()) {
-                        message = "登入成功，歡迎 " + rs.getString("MemberName") + "！";
+                        String memberName = rs.getString("MemberName");
+                        session.setAttribute("username", rs.getString("MemberName"));
+                        isLoggedIn = true;
+                        response.sendRedirect("MainPage Logged In/MainPageLogged.jsp");
+                        return;
                     } else {
                         message = "帳號或密碼錯誤，請重新輸入！";
                     }
                 } catch (Exception e) {
-                    message = "Error: " + e.getMessage();
+                    message = "資料庫連接失敗：" + e.getMessage();
                 } finally {
-                    if (rs != null) rs.close();
-                    if (pstmt != null) pstmt.close();
-                    if (conn != null) conn.close();
+                    if (rs != null) try { rs.close(); } catch(SQLException e) {}
+                    if (pstmt != null) try { pstmt.close(); } catch(SQLException e) {}
+                    if (conn != null) try { conn.close(); } catch(SQLException e) {}
                 }
             }
-        %>
+%>
 
-    <div class="form-box login">
-        <h2>登入</h2>
-        <form action="MainPage.jsp">
-            <div class="input-box">
-                <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                <input type="email" onfocus="this.style.color='#ffff'" required>
-                <label>帳號(email)</label>
-            </div> 
-            <div class="input-box">
-                <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                <input type="password" onfocus="this.style.color='#ffff'" required>
-                <label>密碼</label>
-            </div>  
-            <div class="remeber-forget">
-                <label><input type="checkbox">記住我的帳密</label>
-                <a href="#">忘記密碼</a>
+    <% if (!isLoggedIn) { %>
+            <div class="form-box login">
+                <h2>登入</h2>
+                <form method="post"> <!-- 使用POST方法提交到當前頁面 -->
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                        <input type="email" name="email" onfocus="this.style.color='#ffff'" required>
+                        <label>帳號(email)</label>
+                    </div> 
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                        <input type="password" name="password" onfocus="this.style.color='#ffff'" required>
+                        <label>密碼</label>
+                    </div>  
+                    <div class="remeber-forget">
+                        <label><input type="checkbox">記住我的帳密</label>
+                        <a href="#">忘記密碼</a>
+                    </div>
+                    <input class="btn" type="submit" value="登入">
+                    <div class="login-register">
+                        <p>沒有帳號?&nbsp;<a href="#" class="register-link">註冊</a></p>
+                    </div>
+                </form>
             </div>
-            <input class="btn" type="submit"  value="登入" onclick="location.href='../MainPage Logged in/MainPage.html'"></button>
-            <div class="login-register">
-                <p>沒有帳號?&nbsp;<a href="#" class="register-link">註冊</a></p>
-            </div>
-        </form>
-        <% if (!message.isEmpty()) { %>
-                <p><%= message %></p>
-        <% } %>
-    </div>
+    <% } %>
+
+    <% if (message != null && !message.isEmpty()) { %>
+            <script type="text/javascript">
+                alert('<%= message %>'); // 在頁面加載時顯示彈出消息
+            </script>
+    <% } %>
 
     <%
     String RegisterUsername = request.getParameter("username");
@@ -202,8 +212,8 @@
                 <p>已經擁有帳號了?&nbsp;<a href="#" class="login-link">登入</a></p>
             </div>
         </form>
-        <% if (!message.isEmpty()) { %>
-            <p><%= message %></p>
+        <% if (message != null && !message.isEmpty()) { %>
+        <p><%= message %></p>
         <% } %>
     </div>
 </div>
