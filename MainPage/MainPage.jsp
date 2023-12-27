@@ -100,7 +100,7 @@
 
     <div class="form-box login">
         <h2>登入</h2>
-        <form action="MainPage-1.jsp">
+        <form action="MainPage.jsp">
             <div class="input-box">
                 <span class="icon"><ion-icon name="mail"></ion-icon></span>
                 <input type="email" onfocus="this.style.color='#ffff'" required>
@@ -173,7 +173,7 @@
 
     <div class="form-box register">
         <h2>註冊</h2>
-        <form action="MainPage-1.jsp">
+        <form action="MainPage.jsp">
             <div class="input-box">
                 <span class="icon"><ion-icon name="person"></ion-icon></span>
                 <input type="text" id="username" name="username" onfocus="this.style.color='#ffff'" required>
