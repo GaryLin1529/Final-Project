@@ -11,15 +11,14 @@
     <link rel="stylesheet" href="css/MainPage.css">
     <header class="header">
         <!--按Logo回主頁-->
-        <a href="MainPage.html" class="logo"><img class="header-logo" src="img/logo.png"/></a>
+        <a href="../../MainPage.html" class="logo"><img class="header-logo" src="img/logo.png"/></a>
         
         <!--搜尋欄-->
-        <div class="SearchBar_container">
-            <form action="" class="SearchBar">
-                <input type="text" placeholder="搜尋..." name="question">
-                <button type="submit"><img src="img/search.png"></button>
-            </form>
-        </div>
+        <nav class="navbar">
+            <a href="../../MainPage.html">主頁面</a>
+            <a href="../../Shopping Interface/ShoppingInterface.html">購物車</a>
+            <button class="btnLogin-popup">登入</button>
+        </nav>
 
         <nav class="navbar">
                 <a href="#home" class="active">主頁面</a>
@@ -55,7 +54,7 @@
                 <label><input type="checkbox">記住我的帳密</label>
                 <a href="#">忘記密碼</a>
             </div>
-            <button type="submit" class="btn">登入</button>
+            <input class="btn" type="submit"  value="登入" onclick="location.href='../../../MainPage Logged in/MainPage.html'"></button>
             <div class="login-register">
                 <p>沒有帳號?&nbsp;<a href="#" class="register-link">註冊</a></p>
             </div>
