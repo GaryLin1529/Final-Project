@@ -16,6 +16,7 @@
             <th>書籍 ID </th>
             <th>書名</th>
             <th>作者</th>
+            <th>類別</th>
             <th>庫存量</th>
         </tr>
         <%
@@ -31,18 +32,20 @@
                 conn = DriverManager.getConnection(url, dbUsername, dbPassword);
                 stmt = conn.createStatement(); // 初始化stmt對象
 
-                String sql = "SELECT ProductID, ProductName, BookAuthor, Quantity FROM inventoryquantity";
-                rs = stmt.executeQuery(sql); // 使用stmt執行查詢
+                String sql = "SELECT ProductID, ProductName, BookAuthor, Quantity, BookCategory FROM inventoryquantity";
+                rs = stmt.executeQuery(sql); // 使用stmt執行查詢，並以rs存取全部資料
                 while(rs.next()) {
                     int DisplayID = rs.getInt("ProductID");
                     String DisplayProductName = rs.getString("ProductName");
                     String DisplayAuthor = rs.getString("BookAuthor");
+                    String DisplayCategory = rs.getString("BookCategory");
                     int DisplayQuantity = rs.getInt("Quantity");
         %>
                     <tr>
                         <td><%= DisplayID %></td>
                         <td><%= DisplayProductName %></td>
                         <td><%= DisplayAuthor %></td>
+                        <td><%= DisplayCategory %></td>
                         <td><%= DisplayQuantity %></td>
                     </tr>
         <%
