@@ -45,6 +45,7 @@
                     <a href="#Educational">工具書</a>
             </div>
         </div>
+                <!-- 原初登入按紐 -->
                 <button class="btnLogin-popup">登入</button>
         </nav>
 
@@ -183,7 +184,7 @@
 
     <div class="form-box register">
         <h2>註冊</h2>
-        <form action="MainPage.jsp">
+        <form action="MainPage-1.jsp">
             <div class="input-box">
                 <span class="icon"><ion-icon name="person"></ion-icon></span>
                 <input type="text" id="username" name="username" onfocus="this.style.color='#ffff'" required>
@@ -265,7 +266,7 @@
         <button class="next" onclick="plusSlides(1)">》</button>
 
         <!--javascipt 引入-->
-        <script src="Javascript/slideAD.js"></script>
+        <script src="JavaScript/slideAD.js"></script>
     </div>
     </div>
 
@@ -315,7 +316,12 @@
                         </div>
                         <h4>$<%= price %></h4>
                     </div>
-                    <a href="bookDetails.jsp?ProductID=<%= productId %>"><i class="fas fa-shopping-cart cart"></i></a>
+
+                    <!-- 第二個購物車登入按鈕 -->
+
+                    <a href="#" id="cartLoginBtn"><i class="fas fa-shopping-cart cart"></i> </a>
+                    
+                    <!-- <a href="bookDetails.jsp?ProductID=<%= productId %>"><i class="fas fa-shopping-cart cart"></i></a> -->
 
                     <!-- <a href="product details login/new deatils1/details17.html"><i class="fas fa-shopping-cart cart"></i></a> -->
                 </div>
@@ -363,7 +369,6 @@
             %>
 
             <div class="pro">
-                <h4>imgLiteratureNum : <%= imgLiteratureNum %></h4>
                 <img src="image/literature books(<%= imgLiteratureNum %>).jpg" alt="">
                 <div class="des">
                     <h5><%= productName %></h5>
@@ -399,147 +404,67 @@
 
     <!--主商品頁(工具類書籍)-->
 
-        <h2 id="Educational">-----工具類書籍-----</h2>
+        <h2 id="Educational">-----教育類書籍-----</h2>
         <p>資訊</p>
+
         <div class="pro_container">
-        <!--商品第一列-->
-            <!-- 商品1 -->
+            <%
+                Connection EduConn = null;
+                PreparedStatement EduPstmt = null;
+                ResultSet EduRs = null;
+                int imgEduNum = 1; // Initialize the image counter before the loop
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    String url = "jdbc:mysql://localhost:3306/transactionthing";
+                    String dbUsername = "root";
+                    String dbPassword = "8970";
+                    EduConn = DriverManager.getConnection(url, dbUsername, dbPassword);
+                    // Update the SQL to select books where the Category is 'New'
+                    String sql = "SELECT ProductID, ProductName, BookAuthor, BookCategory, Price FROM inventoryquantity WHERE BookCategory='教育'";
+                    EduPstmt = EduConn.prepareStatement(sql);
+                    EduRs = EduPstmt.executeQuery();
+
+                    while(EduRs.next()) {
+                        int productId = EduRs.getInt("ProductID");
+                        String productName = EduRs.getString("ProductName");
+                        String author = EduRs.getString("BookAuthor");
+                        int price = EduRs.getInt("Price");
+            %>
+
             <div class="pro">
-                <img src="image/Educational Books(1).jpg" alt="">
+                <img src="image/Educational Books(<%= imgEduNum %>).jpg" alt="">
                 <div class="des">
-                    <h5>HTML&CSS網站設計建置優化之道</h5>
-                    <span>Jon Duckett</span>
+                    <h5><%= productName %></h5>
+                    <span><%= author %></span>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>$458</h4>
+                    <h4>$<%= price %></h4>
                 </div>
-                <a href="product details login/Educational details1/details1.html"><i class="fas fa-shopping-cart cart"></i></a>
+                <a href="bookDetails.jsp?ProductID=<%= productId %>"><i class="fas fa-shopping-cart cart"></i></a>
+
+                <!-- <a href="product details login/literature details1/details9.html"><i class="fas fa-shopping-cart cart"></i></a> -->
             </div>
 
-            <!-- 商品2 -->
-            <div class="pro">
-                <img src="image/Educational Books(2).jpg" alt="">
-                <div class="des">
-                    <h5>網頁美編的救星！零基礎也能看得懂的 HTML & CSS 網頁設計</h5>
-                    <span>Mana</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$434</h4>
-                </div>
-                <a href="product details login/Educational details2/details2.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品3 -->
-            <div class="pro">
-                <img src="image/Educational Books(3).jpg" alt="">
-                <div class="des">
-                    <h5>小水豚教你做網站!輕鬆學好HTML/CSS網頁設計</h5>
-                    <span> Capybara Design,竹内直人,竹内瑠美</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$458</h4>
-                </div>
-                <a href="product details login/Educational details3/details3.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品4 -->
-            <div class="pro">
-                <img src="image/Educational Books(4).jpg" alt="">
-                <div class="des">
-                    <h5>Servlet&JSP技術手冊:邁向Spring Boot(第二版)</h5>
-                    <span>adidas</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$489</h4>
-                </div>
-                <a href="product details login/Educational details4/details4.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-        <!--商品第二列-->
-            <!-- 商品5 -->
-            <div class="pro">
-                <img src="image/Educational Books(5).jpg" alt="">
-                <div class="des">
-                    <h5>JSP 2.3動態網頁技術（第六版</h5>
-                    <span>榮欽科技,呂文達</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$325</h4>
-                </div>
-                <a href="product details login/Educational details5/details5.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品6 -->
-            <div class="pro">
-                <img src="image/Educational Books(6).jpg" alt="">
-                <div class="des">
-                    <h5>JSP程式設計領航寶典</h5>
-                    <span>普悠瑪數位科技</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$371</h4>
-                </div>
-                <a href="product details login/Educational details6/details6.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品7 -->
-            <div class="pro">
-                <img src="image/Educational Books(7).jpg" alt="">
-                <div class="des">
-                    <h5>你所不知道的必學前端Debug技巧:即學即用!讓你Debug不求人</h5>
-                    <span>楊楚玄</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$489</h4>
-                </div>
-                <a href="product details login/Educational details7/details7.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品8 -->
-            <div class="pro">
-                <img src="image/Educational Books(8).jpg" alt="">
-                <div class="des">
-                    <h5>瘋狂前端開發講義:jQuery+AngularJS+Bootstrap前端開發實戰</h5>
-                    <span>李剛</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$474</h4>
-                </div>
-                <a href="product details login/Educational details8/details8.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
+            <%
+                        imgEduNum++; // Increment the image counter after each book
+                    }
+                } catch(Exception e) {
+                    out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");
+                } finally {
+                    if (EduRs != null) try { EduRs.close(); } catch (SQLException e) { }
+                    if (EduPstmt != null) try { EduPstmt.close(); } catch (SQLException e) { }
+                    if (EduConn != null) try { EduConn.close(); } catch (SQLException e) { }
+                }
+            %>
         </div>
     </section>
 </div>
     <script src="JavaScript/product.js"></script>
+
 
 <footer>
     <!--團隊介紹-->
@@ -576,7 +501,7 @@
         <!--吳宗儒-->
 
         <div class="teams">
-            <img src="image/lulu.jpg" height="100px" alt="">
+            <img src="image/Lulu.jpg" height="100px" alt="">
             <div class="name">吳宗儒</div>
             <div class="design">11144144</div>
             <div class="card_back">
@@ -584,7 +509,7 @@
                     <img src="image/lulu.jpg" alt="">
                     <h2>心得</h2>
                     <p>藉由這次的專題製作讓我學到很多東西，因為有些東西我是從網路上學到的，讓我發現很多東西其實網路上有更好的做法。
-                        還有一點是要善用AI，出現問題無法解決時去問問cahtgpt，他會有很大的機率可以知道你的錯誤在那裡，這算是我覺得可以快速Debug的方式之一。</p>
+                        還有一點是要善用AI，出現問題無法解決時去問問ChatGpt，他會有很大的機率可以知道你的錯誤在那裡，這算是我覺得可以快速Debug的方式之一。</p>
                     <div class="social_media">
                         <a href="https://www.facebook.com/profile.php?id=100010789622587&locale=zh_TW"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.instagram.com/rem_lulu0202/"><i class="fab fa-instagram"></i></a>
