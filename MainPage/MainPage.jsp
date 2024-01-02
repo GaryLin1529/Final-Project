@@ -62,8 +62,9 @@
         <%
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String message = null;
-            boolean isLoggedIn = false;
+            String message = null; 
+            boolean isLoggedIn = false; // 確認登入成功與否狀態
+            boolean loginEntered = false; // 確認有無進入登入功能
 
             if (email != null && password != null && !email.trim().isEmpty() && !password.trim().isEmpty()) {
                 Connection conn = null;
@@ -84,6 +85,7 @@
                     pstmt.setString(2, password);
 
                     rs = pstmt.executeQuery();
+                    loginEntered = true;
 
                     if (rs.next()) {
                         String memberName = rs.getString("MemberName");
@@ -93,6 +95,7 @@
                         return;
                     } else {
                         message = "帳號或密碼錯誤，請重新輸入！";
+                        
                     }
                 } catch (Exception e) {
                     message = "資料庫連接失敗：" + e.getMessage();
@@ -130,7 +133,7 @@
             </div>
     <% } %>
 
-    <% if (message != null && !message.isEmpty()) { %>
+    <% if (message != null && !message.isEmpty() && isLoggedIn == false && loginEntered == true) { %>
             <script type="text/javascript">
                 alert('<%= message %>'); // 在頁面加載時顯示彈出消息
             </script>
@@ -142,6 +145,7 @@
     String RegisterPassword = request.getParameter("password");
     String RegisterPhoneNumber = request.getParameter("phoneNumber");
     String RegisterMessage = "";
+    boolean isInRegister = false; 
 
     if (RegisterUsername != null && RegisterEmail != null && RegisterPassword != null && RegisterPhoneNumber != null) {
         Connection conn = null;
@@ -166,8 +170,10 @@
 
             int rowsAffected = pstmt.executeUpdate();
 
+            isInRegister = true;
+
             if (rowsAffected > 0) {
-                RegisterMessage = "註冊成功，歡迎 " + RegisterUsername + "!";
+                RegisterMessage = "註冊成功，歡迎 " + RegisterUsername + "!" + "請重新登入";
             } else {
                 RegisterMessage = "註冊失敗，請檢查資料是否正確！";
             }
@@ -184,7 +190,7 @@
 
     <div class="form-box register">
         <h2>註冊</h2>
-        <form action="MainPage-1.jsp">
+        <form action="MainPage.jsp">
             <div class="input-box">
                 <span class="icon"><ion-icon name="person"></ion-icon></span>
                 <input type="text" id="username" name="username" onfocus="this.style.color='#ffff'" required>
@@ -213,8 +219,11 @@
                 <p>已經擁有帳號了?&nbsp;<a href="#" class="login-link">登入</a></p>
             </div>
         </form>
-        <% if (message != null && !message.isEmpty()) { %>
-        <p><%= message %></p>
+        <% if (message != null && !message.isEmpty() && isInRegister == true) { %>
+        <p><script type="text/javascript">
+                alert('<%= RegisterMessage %>'); // 在頁面加載時顯示彈出消息
+            </script>
+        </p>
         <% } %>
     </div>
 </div>

@@ -19,7 +19,6 @@
     padding: 10px 12px;
     border: 1px solid #cce7d0;
     border-radius: 25px;
-    cursor: pointer;
     /*box-shadow是陰影，當下面的hover實現時會將陰影點亮*/
     box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.02);
     /*點亮陰影時有淡入淡出的效果 讓整個效果更smooth*/
