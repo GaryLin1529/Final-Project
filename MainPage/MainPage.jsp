@@ -22,7 +22,7 @@
     <!--前導主頁-->
     <header class="header">
         <!--按Logo回主頁-->
-        <a href="MainPage.html" class="logo"><img class="header-logo" src="image/logo.png"/></a>
+        <a href="MainPage.jsp" class="logo"><img class="header-logo" src="image/logo.png"/></a>
         
         <!--搜尋欄-->
         <div class="SearchBar_container">
@@ -33,7 +33,7 @@
         </div>
 
         <nav class="navbar">
-                <a href="#home" class="active"\>主頁面</a>
+                <a href="MainPage.jsp" class="active"\>主頁面</a>
                 <a href="">購物車</a>
                 
         <div class="dropdown">
@@ -45,6 +45,7 @@
                     <a href="#Educational">工具書</a>
             </div>
         </div>
+                <!-- 原初登入按紐 -->
                 <button class="btnLogin-popup">登入</button>
         </nav>
 
@@ -183,7 +184,7 @@
 
     <div class="form-box register">
         <h2>註冊</h2>
-        <form action="MainPage.jsp">
+        <form action="MainPage-1.jsp">
             <div class="input-box">
                 <span class="icon"><ion-icon name="person"></ion-icon></span>
                 <input type="text" id="username" name="username" onfocus="this.style.color='#ffff'" required>
@@ -265,7 +266,7 @@
         <button class="next" onclick="plusSlides(1)">》</button>
 
         <!--javascipt 引入-->
-        <script src="Javascript/slideAD.js"></script>
+        <script src="JavaScript/slideAD.js"></script>
     </div>
     </div>
 
@@ -276,347 +277,207 @@
         <h2>-----新品上市!!!-----</h2>
         <p>資訊</p>
         <div class="pro_container">
-        <!--商品第一列-->
-            <!-- 商品1 -->
-            <div class="pro">
-                <img src="image/new(1).jpg" alt="">
-                <div class="des">
-                    <h5>小王子</h5>
-                    <span>Antoine de Saint-Exupery</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$173</h4>
-                </div>
-                <a href="product details login/new deatils1/details17.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
+            <!-- 商品列表從資料庫動態生成 -->
+            <%
+                Connection NewProductConn = null;
+                PreparedStatement NewProductPstmt = null;
+                ResultSet NewProductRs = null;
+                int imgNewProductNum = 1; // Initialize the image counter before the loop
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    String url = "jdbc:mysql://localhost:3306/transactionthing";
+                    String dbUsername = "root";
+                    String dbPassword = "8970";
+                    NewProductConn = DriverManager.getConnection(url, dbUsername, dbPassword);
+                    // Update the SQL to select books where the Category is 'New'
+                    String sql = "SELECT ProductID, ProductName, BookAuthor, BookCategory, Price FROM inventoryquantity WHERE BookCategory='新品'";
+                    NewProductPstmt = NewProductConn.prepareStatement(sql);
+                    NewProductRs = NewProductPstmt.executeQuery();
 
-            <!-- 商品2 -->
-            <div class="pro">
-                <img src="image/new(2).jpg" alt="">
-                <div class="des">
-                    <h5>異鄉人</h5>
-                    <span>Albert Camus</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                    while(NewProductRs.next()) {
+                        int productId = NewProductRs.getInt("ProductID");
+                        String productName = NewProductRs.getString("ProductName");
+                        String author = NewProductRs.getString("BookAuthor");
+                        int price = NewProductRs.getInt("Price");
+            %>
+            <!--商品 新品-->
+                <div class="pro">
+                    <img src="image/new(<%= imgNewProductNum %>).jpg" alt="">
+                    <div class="des">
+                        <h5><%= productName %></h5>
+                        <span><%= author %></span>
+                        <div class="star">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>$<%= price %></h4>
                     </div>
-                    <h4>$173</h4>
-                </div>
-                <a href="product details login/new deatils2/details18.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
 
-            <!-- 商品3 -->
-            <div class="pro">
-                <img src="image/new(3).jpg" alt="">
-                <div class="des">
-                    <h5>深夜加油站遇見蘇格拉底</h5>
-                    <span>Dan Millman</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$234</h4>
+                    <!-- 第二個購物車登入按鈕 -->
+
+                    <a href="#" onclick="showLoginAlert()" ><i class="fas fa-shopping-cart cart"></i></a>
+                    
                 </div>
-                <a href="product details login/new deatils3/details19.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
+                
+            <%
+                        imgNewProductNum++; // Increment the image counter after each book
+                    }
+                } catch(Exception e) {
+                    out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");
+                } finally {
+                    if (NewProductRs != null) try { NewProductRs.close(); } catch (SQLException e) { }
+                    if (NewProductPstmt != null) try { NewProductPstmt.close(); } catch (SQLException e) { }
+                    if (NewProductConn != null) try { NewProductConn.close(); } catch (SQLException e) { }
+                }
+            %>
+
+            <script>
+                function showLoginAlert() {
+                // 顯示提示信息，告知用戶需要登入
+                alert('🔔 請登入會員後再行購買！🔔');
+                }
+            </script>
+
         </div>
 
-    <!--主商品頁(文學書籍)-->
-    
+        <!--主商品頁(文學書籍)-->
         <h2 id="literature">-----文學類書籍-----</h2>
         <p>資訊</p>
+
         <div class="pro_container">
-        <!--商品第一列-->
-            <!-- 商品1 -->
+            <%
+                Connection LiteraturetConn = null;
+                PreparedStatement LiteraturetPstmt = null;
+                ResultSet LiteratureRs = null;
+                int imgLiteratureNum = 1; // Initialize the image counter before the loop
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    String url = "jdbc:mysql://localhost:3306/transactionthing";
+                    String dbUsername = "root";
+                    String dbPassword = "8970";
+                    LiteraturetConn = DriverManager.getConnection(url, dbUsername, dbPassword);
+                    // Update the SQL to select books where the Category is 'New'
+                    String sql = "SELECT ProductID, ProductName, BookAuthor, BookCategory, Price FROM inventoryquantity WHERE BookCategory='文學'";
+                    LiteraturetPstmt = LiteraturetConn.prepareStatement(sql);
+                    LiteratureRs = LiteraturetPstmt.executeQuery();
+
+                    while(LiteratureRs.next()) {
+                        int productId = LiteratureRs.getInt("ProductID");
+                        String productName = LiteratureRs.getString("ProductName");
+                        String author = LiteratureRs.getString("BookAuthor");
+                        int price = LiteratureRs.getInt("Price");
+            %>
+
             <div class="pro">
-                <img src="image/literature books(1).jpg" alt="">
+                <img src="image/literature books(<%= imgLiteratureNum %>).jpg" alt="">
                 <div class="des">
-                    <h5>52赫茲的鯨魚們</h5>
-                    <span>町田苑香</span>
+                    <h5><%= productName %></h5>
+                    <span><%= author %></span>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>$300</h4>
+                    <h4>$<%= price %></h4>
                 </div>
-                <a href="product details login/literature details1/details9.html"><i class="fas fa-shopping-cart cart"></i></a>
+                <a href="#" onclick="showLoginAlert()" ><i class="fas fa-shopping-cart cart"></i></a>
             </div>
 
-            <!-- 商品2 -->
-            <div class="pro">
-                <img src="image/literature books(2).jpg" alt="">
-                <div class="des">
-                    <h5>海風酒店</h5>
-                    <span>吳明益</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$420</h4>
-                </div>
-                <a href="product details login/literature details2/details10.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
+            <%
+                        imgLiteratureNum++; // Increment the image counter after each book
+                    }
+                } catch(Exception e) {
+                    out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");
+                } finally {
+                    if (LiteratureRs != null) try { LiteratureRs.close(); } catch (SQLException e) { }
+                    if (LiteraturetPstmt != null) try { LiteraturetPstmt.close(); } catch (SQLException e) { }
+                    if (LiteraturetConn != null) try { LiteraturetConn.close(); } catch (SQLException e) { }
+                }
+            %>
 
-            <!-- 商品3 -->
-            <div class="pro">
-                <img src="image/literature books(3).jpg" alt="">
-                <div class="des">
-                    <h5>那些少女沒有抵達</h5>
-                    <span>吳曉樂</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$355</h4>
-                </div>
-                <a href="product details login/literature details3/details11.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
+            <script>
+                function showLoginAlert() {
+                // 顯示提示信息，告知用戶需要登入
+                alert('🔔 請登入會員後再行購買！🔔 ');
+                }
+            </script>
 
-            <!-- 商品4 -->
-            <div class="pro">
-                <img src="image/literature books(4).jpg" alt="">
-                <div class="des">
-                    <h5>秘密</h5>
-                    <span>東野圭吾</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$355</h4>
-                </div>
-                <a href="product details login/literature details4/details12.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
+        </div>    
 
-        <!--商品第二列-->
-            <!-- 商品5 -->
-            <div class="pro">
-                <img src="image/literature books(5).jpg" alt="">
-                <div class="des">
-                    <h5>歪笑小說</h5>
-                    <span>東野圭吾</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$237</h4>
-                </div>
-                <a href="product details login/literature details5/details13.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品6 -->
-            <div class="pro">
-                <img src="image/literature books(6).jpg" alt="">
-                <div class="des">
-                    <h5>我的文青時代</h5>
-                    <span>蔣勳</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$300</h4>
-                </div>
-                <a href="product details login/literature details6/details14.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品7 -->
-            <div class="pro">
-                <img src="image/literature books(7).jpg" alt="">
-                <div class="des">
-                    <h5>冬泳</h5>
-                    <span>班宇</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$316</h4>
-                </div>
-                <a href="product details login/literature details7/details15.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品8 -->
-            <div class="pro">
-                <img src="image/literature books(8).jpg" alt="">
-                <div class="des">
-                    <h5>春日遲</h5>
-                    <span>凜之</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$180</h4>
-                </div>
-                <a href="product details login/literature details8/details16.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-        </div>
+        
 
 
     <!--主商品頁(工具類書籍)-->
 
-        <h2 id="Educational">-----工具類書籍-----</h2>
+        <h2 id="Educational">-----教育類書籍-----</h2>
         <p>資訊</p>
+
         <div class="pro_container">
-        <!--商品第一列-->
-            <!-- 商品1 -->
+            <%
+                Connection EduConn = null;
+                PreparedStatement EduPstmt = null;
+                ResultSet EduRs = null;
+                int imgEduNum = 1; // Initialize the image counter before the loop
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    String url = "jdbc:mysql://localhost:3306/transactionthing";
+                    String dbUsername = "root";
+                    String dbPassword = "8970";
+                    EduConn = DriverManager.getConnection(url, dbUsername, dbPassword);
+                    // Update the SQL to select books where the Category is 'New'
+                    String sql = "SELECT ProductID, ProductName, BookAuthor, BookCategory, Price FROM inventoryquantity WHERE BookCategory='教育'";
+                    EduPstmt = EduConn.prepareStatement(sql);
+                    EduRs = EduPstmt.executeQuery();
+
+                    while(EduRs.next()) {
+                        int productId = EduRs.getInt("ProductID");
+                        String productName = EduRs.getString("ProductName");
+                        String author = EduRs.getString("BookAuthor");
+                        int price = EduRs.getInt("Price");
+            %>
+
             <div class="pro">
-                <img src="image/Educational Books(1).jpg" alt="">
+                <img src="image/Educational Books(<%= imgEduNum %>).jpg" alt="">
                 <div class="des">
-                    <h5>HTML&CSS網站設計建置優化之道</h5>
-                    <span>Jon Duckett</span>
+                    <h5><%= productName %></h5>
+                    <span><%= author %></span>
                     <div class="star">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <h4>$458</h4>
+                    <h4>$<%= price %></h4>
                 </div>
-                <a href="product details login/Educational details1/details1.html"><i class="fas fa-shopping-cart cart"></i></a>
+                <a href="#" onclick="showLoginAlert()" ><i class="fas fa-shopping-cart cart"></i></a>
             </div>
 
-            <!-- 商品2 -->
-            <div class="pro">
-                <img src="image/Educational Books(2).jpg" alt="">
-                <div class="des">
-                    <h5>網頁美編的救星！零基礎也能看得懂的 HTML & CSS 網頁設計</h5>
-                    <span>Mana</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$434</h4>
-                </div>
-                <a href="product details login/Educational details2/details2.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品3 -->
-            <div class="pro">
-                <img src="image/Educational Books(3).jpg" alt="">
-                <div class="des">
-                    <h5>小水豚教你做網站!輕鬆學好HTML/CSS網頁設計</h5>
-                    <span> Capybara Design,竹内直人,竹内瑠美</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$458</h4>
-                </div>
-                <a href="product details login/Educational details3/details3.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品4 -->
-            <div class="pro">
-                <img src="image/Educational Books(4).jpg" alt="">
-                <div class="des">
-                    <h5>Servlet&JSP技術手冊:邁向Spring Boot(第二版)</h5>
-                    <span>adidas</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$489</h4>
-                </div>
-                <a href="product details login/Educational details4/details4.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-        <!--商品第二列-->
-            <!-- 商品5 -->
-            <div class="pro">
-                <img src="image/Educational Books(5).jpg" alt="">
-                <div class="des">
-                    <h5>JSP 2.3動態網頁技術（第六版</h5>
-                    <span>榮欽科技,呂文達</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$325</h4>
-                </div>
-                <a href="product details login/Educational details5/details5.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品6 -->
-            <div class="pro">
-                <img src="image/Educational Books(6).jpg" alt="">
-                <div class="des">
-                    <h5>JSP程式設計領航寶典</h5>
-                    <span>普悠瑪數位科技</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$371</h4>
-                </div>
-                <a href="product details login/Educational details6/details6.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品7 -->
-            <div class="pro">
-                <img src="image/Educational Books(7).jpg" alt="">
-                <div class="des">
-                    <h5>你所不知道的必學前端Debug技巧:即學即用!讓你Debug不求人</h5>
-                    <span>楊楚玄</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$489</h4>
-                </div>
-                <a href="product details login/Educational details7/details7.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
-
-            <!-- 商品8 -->
-            <div class="pro">
-                <img src="image/Educational Books(8).jpg" alt="">
-                <div class="des">
-                    <h5>瘋狂前端開發講義:jQuery+AngularJS+Bootstrap前端開發實戰</h5>
-                    <span>李剛</span>
-                    <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h4>$474</h4>
-                </div>
-                <a href="product details login/Educational details8/details8.html"><i class="fas fa-shopping-cart cart"></i></a>
-            </div>
+            <%
+                        imgEduNum++; // Increment the image counter after each book
+                    }
+                } catch(Exception e) {
+                    out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");
+                } finally {
+                    if (EduRs != null) try { EduRs.close(); } catch (SQLException e) { }
+                    if (EduPstmt != null) try { EduPstmt.close(); } catch (SQLException e) { }
+                    if (EduConn != null) try { EduConn.close(); } catch (SQLException e) { }
+                }
+            %>
         </div>
     </section>
 </div>
     <script src="JavaScript/product.js"></script>
+    <script>
+                function showLoginAlert() {
+                // 顯示提示信息，告知用戶需要登入
+                alert('🔔 請登入會員後再行購買！🔔 ');
+                }
+    </script>
+
 
 <footer>
     <!--團隊介紹-->
@@ -653,7 +514,7 @@
         <!--吳宗儒-->
 
         <div class="teams">
-            <img src="image/lulu.jpg" height="100px" alt="">
+            <img src="image/Lulu.jpg" height="100px" alt="">
             <div class="name">吳宗儒</div>
             <div class="design">11144144</div>
             <div class="card_back">
@@ -661,7 +522,7 @@
                     <img src="image/lulu.jpg" alt="">
                     <h2>心得</h2>
                     <p>藉由這次的專題製作讓我學到很多東西，因為有些東西我是從網路上學到的，讓我發現很多東西其實網路上有更好的做法。
-                        還有一點是要善用AI，出現問題無法解決時去問問cahtgpt，他會有很大的機率可以知道你的錯誤在那裡，這算是我覺得可以快速Debug的方式之一。</p>
+                        還有一點是要善用AI，出現問題無法解決時去問問ChatGpt，他會有很大的機率可以知道你的錯誤在那裡，這算是我覺得可以快速Debug的方式之一。</p>
                     <div class="social_media">
                         <a href="https://www.facebook.com/profile.php?id=100010789622587&locale=zh_TW"><i class="fab fa-facebook"></i></a>
                         <a href="https://www.instagram.com/rem_lulu0202/"><i class="fab fa-instagram"></i></a>

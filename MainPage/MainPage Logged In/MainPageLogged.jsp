@@ -22,7 +22,7 @@
     <!--前導主頁-->
     <header class="header">
         <!--按Logo回主頁-->
-        <a href="MainPage.html" class="logo"><img class="header-logo" src="image/logo.png"/></a>
+        <a href="MainPageLogged.jsp" class="logo"><img class="header-logo" src="image/logo.png"/></a>
         
         <!--搜尋欄-->
         <div class="SearchBar_container">
@@ -33,7 +33,7 @@
         </div>
 
         <nav class="navbar">
-                <a href="#home" class="active"\>主頁面</a>
+                <a href="MainPageLogged.jsp" class="active"\>主頁面</a>
                 <a href="">購物車</a>
                 
         <div class="dropdown">
@@ -156,9 +156,7 @@
                         </div>
                         <h4>$<%= price %></h4>
                     </div>
-                    <a href="bookDetails.jsp?ProductID=<%= productId %>"><i class="fas fa-shopping-cart cart"></i></a>
-
-                    <!-- <a href="product details login/new deatils1/details17.html"><i class="fas fa-shopping-cart cart"></i></a> -->
+                    <a href="BookDetails(Logged In)/BookDetails.jsp?ProductID=<%= productId %>"><i class="fas fa-shopping-cart cart"></i></a>
                 </div>
                 
             <%
@@ -216,9 +214,7 @@
                     </div>
                     <h4>$<%= price %></h4>
                 </div>
-                <a href="bookDetails.jsp?ProductID=<%= productId %>"><i class="fas fa-shopping-cart cart"></i></a>
-
-                <!-- <a href="product details login/literature details1/details9.html"><i class="fas fa-shopping-cart cart"></i></a> -->
+                <a href="BookDetails(Logged In)/BookDetails.jsp?ProductID=<%= productId %>"><i class="fas fa-shopping-cart cart"></i></a>
             </div>
 
             <%
@@ -279,9 +275,7 @@
                     </div>
                     <h4>$<%= price %></h4>
                 </div>
-                <a href="bookDetails.jsp?ProductID=<%= productId %>"><i class="fas fa-shopping-cart cart"></i></a>
-
-                <!-- <a href="product details login/literature details1/details9.html"><i class="fas fa-shopping-cart cart"></i></a> -->
+                <a href="BookDetails(Logged In)/BookDetails.jsp?ProductID=<%= productId %>"><i class="fas fa-shopping-cart cart"></i></a>
             </div>
 
             <%
