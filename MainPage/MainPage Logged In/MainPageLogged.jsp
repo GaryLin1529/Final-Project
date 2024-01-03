@@ -44,6 +44,40 @@
                     <a href="#literature">文學書</a>
                     <a href="#Educational">工具書</a>
             </div>
+        <% //----------- ADD COOKIE------------------------
+// Assume user has successfully logged in and 'username' is set
+String username = (String) session.getAttribute("username");
+
+if (username != null && !username.isEmpty()) {
+    // SimpleDateFormat to format dates
+    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+    String currentDate = sdf.format(new java.util.Date());
+
+    // Retrieve last login date and count from session or initialize if not exist
+    String lastLoginDate = (String) session.getAttribute(username + "_lastLoginDate");
+    Integer loginCount = (Integer) session.getAttribute(username + "_loginCount");
+    if (loginCount == null) {
+        loginCount = 0;
+    }
+
+    // Check and update login information
+    if (!currentDate.equals(lastLoginDate)) {
+        lastLoginDate = currentDate;
+        loginCount = 1; // Reset count for a new day
+    } else {
+        loginCount++; // Increment count for the same day
+    }
+
+    // Store updated values in session
+    session.setAttribute(username + "_lastLoginDate", lastLoginDate);
+    session.setAttribute(username + "_loginCount", loginCount);
+
+    // Display message on second or subsequent login of the day
+    if (loginCount > 1) {
+        out.println("<p>Welcome back, " + username + "! This is your " + loginCount + " visit today.</p>");
+    }
+}
+%> //-----------
         </div>
                 <%
                 String username = (String) session.getAttribute("username");
