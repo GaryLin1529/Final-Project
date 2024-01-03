@@ -80,26 +80,69 @@
 
     <!--滾動式廣告-->
     <div class="slideshow-container">
-        <div class="singleslide fade">
-            <a href="product details login/new deatils1/details17.html">
-                <img src="image/new(1).jpg">
-            </a>
-                <div class="text">新品推出!!! 小王子</div>
-        </div>
+        <!-- 商品列表從資料庫動態生成 -->
+            <%
+                Connection RollProductConn = null;
+                PreparedStatement RollProductPstmt = null;
+                ResultSet RollProductRs = null;
+                try {
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    String url = "jdbc:mysql://localhost:3306/transactionthing";
+                    String dbUsername = "root";
+                    String dbPassword = "8970";
+                    RollProductConn = DriverManager.getConnection(url, dbUsername, dbPassword);
+                    // Update the SQL to select books where the Category is 'New'
+                    String sql = "SELECT ProductID, ProductName, BookAuthor, BookCategory, Price FROM inventoryquantity WHERE BookCategory='新品'";
+                    RollProductPstmt = RollProductConn.prepareStatement(sql);
+                    RollProductRs = RollProductPstmt.executeQuery();
 
-        <div class="singleslide fade">
-            <a href="product details login/new deatils2/details18.html">
-                <img src="image/new(2).jpg">
-            </a>
-            <div class="text">新品推出!!! 異鄉人(卡謬版書衣)</div>
-        </div>
+                    while(RollProductRs.next()) {
+                        int productId = RollProductRs.getInt("ProductID");
+                        String productName = RollProductRs.getString("ProductName");
+                        String author = RollProductRs.getString("BookAuthor");
+                        int price = RollProductRs.getInt("Price");
+            %>
+                <div class="singleslide fade">
+                    <%
+                        productId = 1;
+                    %>
+                    <a href="BookDetails(Logged In)/BookDetails.jsp?ProductID=<%= productId %>">
+                        <img src="image/new(1).jpg">
+                    </a>
+                        <div class="text">新品推出!!! 小王子</div>
+                </div>
 
-        <div class="singleslide fade">
-            <a href="product details login/new deatils3/details19.html">
-                <img src="image/new(3).jpg">
-            </a>
-            <div class="text">新品推出!!! 深夜加油站遇見蘇格拉底</div>
-        </div>
+                <div class="singleslide fade">
+                    <%
+                        productId = 2;
+                    %>
+                    <a href="BookDetails(Logged In)/BookDetails.jsp?ProductID=<%= productId %>">
+                        <img src="image/new(2).jpg">
+                    </a>
+                    <div class="text">新品推出!!! 異鄉人(卡謬版書衣)</div>
+                </div>
+
+                <div class="singleslide fade">
+                    <%
+                        productId = 3;
+                    %>
+                    <a href="BookDetails(Logged In)/BookDetails.jsp?ProductID=<%= productId %>">
+                        <img src="image/new(3).jpg">
+                    </a>
+                    <div class="text">新品推出!!! 深夜加油站遇見蘇格拉底</div>
+                </div>
+
+            <%
+                    
+                    }
+                } catch(Exception e) {
+                    out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");
+                } finally {
+                    if (RollProductRs != null) try { RollProductRs.close(); } catch (SQLException e) { }
+                    if (RollProductPstmt != null) try { RollProductPstmt.close(); } catch (SQLException e) { }
+                    if (RollProductConn != null) try { RollProductConn.close(); } catch (SQLException e) { }
+                }
+            %>
     
         <!--響應式按鈕-->
         <button class="prev" onclick="plusSlides(-1)">《</button>
@@ -334,7 +377,7 @@
             <div class="design">11144144</div>
             <div class="card_back">
                 <div class="back_content">
-                    <img src="image/lulu.jpg" alt="">
+                    <img src="image/Lulu.jpg" alt="">
                     <h2>心得</h2>
                     <p>藉由這次的專題製作讓我學到很多東西，因為有些東西我是從網路上學到的，讓我發現很多東西其實網路上有更好的做法。
                         還有一點是要善用AI，出現問題無法解決時去問問ChatGpt，他會有很大的機率可以知道你的錯誤在那裡，這算是我覺得可以快速Debug的方式之一。</p>

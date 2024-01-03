@@ -34,7 +34,6 @@
 
         <nav class="navbar">
                 <a href="MainPage.jsp" class="active"\>主頁面</a>
-                <a href="">購物車</a>
                 
         <div class="dropdown">
             <button class="dropbtn">
@@ -250,24 +249,25 @@
     <!--滾動式廣告-->
     <div class="slideshow-container">
         <div class="singleslide fade">
-            <a href="product details login/new deatils1/details17.html">
+            <a href="#" onclick="showLoginAlert()" > <!-- 如可以點擊，則顯示登入後再購買訊息 -->
                 <img src="image/new(1).jpg">
             </a>
                 <div class="text">新品推出!!! 小王子</div>
         </div>
 
         <div class="singleslide fade">
-            <a href="product details login/new deatils2/details18.html">
+            <a href="#" onclick="showLoginAlert()" > <!-- 如可以點擊，則顯示登入後再購買訊息 -->
                 <img src="image/new(2).jpg">
             </a>
-            <div class="text">新品推出!!! 異鄉人(卡謬版書衣)</div>
+            <div class="text">新品推出!!! 異鄉人(卡謬版書衣)</div> 
         </div>
 
         <div class="singleslide fade">
-            <a href="product details login/new deatils3/details19.html">
+
+            <a href="#" onclick="showLoginAlert()" > <!-- 如可以點擊，則顯示登入後再購買訊息 -->
                 <img src="image/new(3).jpg">
             </a>
-            <div class="text">新品推出!!! 深夜加油站遇見蘇格拉底</div>
+            <div class="text">新品推出!!! 深夜加油站遇見蘇格拉底</div> 
         </div>
     
         <!--響應式按鈕-->
@@ -276,6 +276,14 @@
 
         <!--javascipt 引入-->
         <script src="JavaScript/slideAD.js"></script>
+
+        
+        <script>
+            function showLoginAlert() {
+                // 顯示提示信息，告知用戶需要登入
+                alert('🔔 請登入會員後再行購買！🔔');
+            }
+        </script>
     </div>
     </div>
 
@@ -528,7 +536,7 @@
             <div class="design">11144144</div>
             <div class="card_back">
                 <div class="back_content">
-                    <img src="image/lulu.jpg" alt="">
+                    <img src="image/Lulu.jpg" alt="">
                     <h2>心得</h2>
                     <p>藉由這次的專題製作讓我學到很多東西，因為有些東西我是從網路上學到的，讓我發現很多東西其實網路上有更好的做法。
                         還有一點是要善用AI，出現問題無法解決時去問問ChatGpt，他會有很大的機率可以知道你的錯誤在那裡，這算是我覺得可以快速Debug的方式之一。</p>
