@@ -16,6 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `cart`
+--
+
+DROP TABLE IF EXISTS `cart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cart` (
+  `cartID` int NOT NULL AUTO_INCREMENT,
+  `customerID` varchar(45) NOT NULL,
+  `productID` varchar(45) NOT NULL,
+  `orderQ` int NOT NULL,
+  PRIMARY KEY (`cartID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cart`
+--
+
+LOCK TABLES `cart` WRITE;
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+INSERT INTO `cart` VALUES (1,'1','2',2),(2,'1','1',1),(3,'1','3',1),(4,'1','10',1);
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `inventoryquantity`
 --
 
@@ -25,12 +51,14 @@ DROP TABLE IF EXISTS `inventoryquantity`;
 CREATE TABLE `inventoryquantity` (
   `ProductID` int NOT NULL,
   `ProductName` varchar(45) NOT NULL,
+  `Price` int NOT NULL,
   `Quantity` int NOT NULL,
   `BookCategory` varchar(45) NOT NULL,
   `BookLanguage` varchar(45) NOT NULL,
   `BookAuthor` varchar(45) NOT NULL,
-  `SupplierID` int NOT NULL,
   `Translator` varchar(45) NOT NULL,
+  `SupplierID` int NOT NULL,
+  `SupplierName` varchar(45) NOT NULL,
   PRIMARY KEY (`ProductID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,7 +69,7 @@ CREATE TABLE `inventoryquantity` (
 
 LOCK TABLES `inventoryquantity` WRITE;
 /*!40000 ALTER TABLE `inventoryquantity` DISABLE KEYS */;
-INSERT INTO `inventoryquantity` VALUES (1,'小王子',10,'新品','繁體中文','修伯里',100,'張家琪'),(2,'異鄉人',10,'新品','繁體中文','卡繆',100,'張一喬'),(3,'深夜加油站遇見蘇格拉底',10,'新品','繁體中文',' 丹．米爾曼',100,'韓良憶'),(4,'52赫茲的鯨魚們',10,'文學','繁體中文','町田苑香',100,'王蘊潔'),(5,'海風酒店',10,'文學','繁體中文','吳明益',100,'無'),(6,'那些少女沒有抵達',10,'文學','繁體中文','吳曉樂',105,'王蘊潔'),(7,'秘密',10,'文學','繁體中文','東野圭吾',105,'無'),(8,'歪笑小說 ',10,'文學','繁體中文','東野圭吾',105,'陳姿瑄'),(9,'我的文青時代',10,'文學','繁體中文','蔣勳',105,'無'),(10,'HTML&CSS：網站設計建置優化之道',10,'教育','繁體中文','張雅芳',105,'無'),(11,'網頁美編的救星！ 零基礎也能看得懂的 HTML & CSS 網頁設計',10,'教育','繁體中文','吳嘉芳',110,'無'),(12,'小水豚教你做網站! 輕鬆學好 HTML / CSS 網頁設計',10,'教育','繁體中文','竹内直人',110,'吳嘉芳'),(13,'Servlet&JSP技術手冊：邁向Spring Boot(第二版)',10,'教育','繁體中文','林信良',110,'無'),(14,'JSP 2.3動態網頁技術（第六版）',10,'教育','繁體中文','呂文達',110,'無'),(15,'JSP程式設計領航寶典',10,'教育','繁體中文','普悠瑪數位科技',110,'無'),(16,'春日遲',10,'文學','繁體中文','凜之',115,'無'),(18,'冬泳',10,'文學','繁體中文','班宇',115,'無'),(19,'你所不知道的必學前端Debug技巧',10,'教育','繁體中文','楊楚玄',115,'無'),(20,'jQuery+AngularJS+Bootstrap前端開發實戰',10,'教育','簡體中文','李剛',115,'無');
+INSERT INTO `inventoryquantity` VALUES (1,'小王子',173,10,'新品','繁體中文','修伯里','張家琪',100,'蒼海'),(2,'異鄉人',173,10,'新品','繁體中文','卡繆','張一喬',100,'蒼海'),(3,'深夜加油站遇見蘇格拉底',234,10,'新品','繁體中文',' 丹．米爾曼','韓良憶',100,'蒼海'),(4,'52赫茲的鯨魚們',300,10,'文學','繁體中文','町田苑香','王蘊潔',100,'蒼海'),(5,'海風酒店',420,10,'文學','繁體中文','吳明益','無',100,'蒼海'),(6,'那些少女沒有抵達',355,10,'文學','繁體中文','吳曉樂','王蘊潔',105,'團月'),(7,'秘密',355,10,'文學','繁體中文','東野圭吾','王蘊潔',105,'團月'),(8,'歪笑小說 ',237,10,'文學','繁體中文','東野圭吾','陳姿瑄',105,'團月'),(9,'我的文青時代',300,10,'文學','繁體中文','蔣勳','無',105,'團月'),(10,'HTML&CSS：網站設計建置優化之道',458,10,'教育','繁體中文','張雅芳','無',105,'團月'),(11,'網頁美編的救星！ 零基礎也能看得懂的 HTML & CSS 網頁設計',434,10,'教育','繁體中文','吳嘉芳','無',110,'周周'),(12,'小水豚教你做網站! 輕鬆學好 HTML / CSS 網頁設計',458,10,'教育','繁體中文','竹内直人','吳嘉芳',110,'周周'),(13,'Servlet&JSP技術手冊：邁向Spring Boot(第二版)',489,10,'教育','繁體中文','林信良','無',110,'周周'),(14,'JSP 2.3動態網頁技術（第六版）',325,10,'教育','繁體中文','呂文達','無',110,'周周'),(15,'JSP程式設計領航寶典',371,10,'教育','繁體中文','普悠瑪數位科技','無',110,'周周'),(16,'春日遲',180,10,'文學','繁體中文','凜之','無',115,'文化'),(17,'冬泳',316,10,'文學','繁體中文','班宇','無',115,'文化'),(18,'你所不知道的必學前端Debug技巧',489,10,'教育','繁體中文','楊楚玄','無',115,'文化'),(19,'jQuery+AngularJS+Bootstrap前端開發實戰',474,10,'教育','簡體中文','李剛','無',115,'文化');
 /*!40000 ALTER TABLE `inventoryquantity` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -59,7 +87,7 @@ CREATE TABLE `membership` (
   `MemberAccount` varchar(45) NOT NULL,
   `MemberPhone` int NOT NULL,
   PRIMARY KEY (`MemberID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +96,7 @@ CREATE TABLE `membership` (
 
 LOCK TABLES `membership` WRITE;
 /*!40000 ALTER TABLE `membership` DISABLE KEYS */;
-INSERT INTO `membership` VALUES (1,'11144209','JayPan','JayPan@gmail.com',955889701),(2,'11144239','Mina','Mina@gmail.com',985476321),(3,'11144275','Nathania','Nathania@gmail.com',957236589),(6,'1234','Budi','Budi@gmail.com',957636580);
+INSERT INTO `membership` VALUES (1,'11144209','JayPan','JayPan@gmail.com',955889701),(2,'11144239','Mina','Mina@gmail.com',985476321),(3,'11144275','Nathania','Nathania@gmail.com',957236589),(7,'11144876','John','John@gmail.com',974266873),(8,'11144872','Hank','Hank@gmail.com',954122367),(9,'11144297','Hank','Hank@gmail.com',966522147),(10,'11144559','Paul','Paul@gmail.com',987522317),(11,'11144789','Yale','Yale@gmail.com',955122367),(12,'11144273','Tom','Tom@gmail.com',94412207),(13,'11144369','林黛玉','Yu@gmail.com',955477216),(14,'11144789','薛寶釵','Bow@gmail.com',974266581),(15,'11144203','李白','Li@gmail.com',932468520);
 /*!40000 ALTER TABLE `membership` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -93,6 +121,7 @@ CREATE TABLE `reviews` (
 
 LOCK TABLES `reviews` WRITE;
 /*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
+INSERT INTO `reviews` VALUES (5,'8523','i'),(5,'真棒','JayPan'),(5,'Really Nice','Nat'),(5,'Good!','Paul'),(5,'8523','Queen'),(1,'77777','Yale'),(5,'書中內容還不亞於我堂上樓閣的書呢！','林黛玉');
 /*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-28 23:17:02
+-- Dump completed on 2024-01-05 20:57:53

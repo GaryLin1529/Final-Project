@@ -45,62 +45,58 @@
                     <a href="#literature">文學書</a>
                     <a href="#Educational">工具書</a>
             </div>
-        <% //----------- ADD COOKIE------------------------
-// Assume user has successfully logged in and 'username' is set
-String username = (String) session.getAttribute("username");
 
-if (username != null && !username.isEmpty()) {
-    // SimpleDateFormat to format dates
-    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-    String currentDate = sdf.format(new java.util.Date());
+    <%
+        // Declare and initialize username here
+        String username = (String) session.getAttribute("username");
+        boolean isReturningUser = false;
 
-    // Retrieve last login date and count from session or initialize if not exist
-    String lastLoginDate = (String) session.getAttribute(username + "_lastLoginDate");
-    Integer loginCount = (Integer) session.getAttribute(username + "_loginCount");
-    if (loginCount == null) {
-        loginCount = 0;
-    }
+        Boolean cookieAlertShown = (Boolean) session.getAttribute("cookieAlertShown");
+        if (cookieAlertShown == null) {
+            cookieAlertShown = false;
+        }
 
-    // Check and update login information
-    if (!currentDate.equals(lastLoginDate)) {
-        lastLoginDate = currentDate;
-        loginCount = 1; // Reset count for a new day
-    } else {
-        loginCount++; // Increment count for the same day
-    }
+            Cookie[] cookies = request.getCookies();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if (cookie.getName().equals("username")) {
+                        isReturningUser = true;
+                        break;
+                    }
+                }
+            }
 
-    // Store updated values in session
-    session.setAttribute(username + "_lastLoginDate", lastLoginDate);
-    session.setAttribute(username + "_loginCount", loginCount);
+        // Cookie creation and notification code
+        if (username != null && !username.isEmpty()) {
+            // 如果用戶已經登入
+            if (!cookieAlertShown) {
+                Cookie userCookie = new Cookie("username", username);
+                userCookie.setMaxAge(24 * 60 * 60); // Expires in 1 day
+                response.addCookie(userCookie);
 
-    // Display message on second or subsequent login of the day
-    if (loginCount > 1) {
-        out.println("<p>Welcome back, " + username + "! This is your " + loginCount + " visit today.</p>");
-    }
-}
-%> //-----------
+                // Show alert and set flag
+                out.println("<script type='text/javascript'>alert('我們使用 cookies 以增強您的體驗。');</script>");
+                session.setAttribute("cookieAlertShown", true);
+            }
+
+            // 顯示歡迎信息和用戶名
+            %>
+                <input class="btnLogin-popup" type="button" value="歡迎  <%= username %>" "></button>
+            <%
+        } else {
+            // 如果用戶未登入，顯示默認的按鈕文本
+            %>
+                <input class="btnLogin-popup" type="button" value="帳戶" onclick="location.href=''"></button>
+            <%
+        }
+
+%>
         </div>
 
             
                 
 
-                <!-- 以上cookie 合併會產生bug問題 -->
-
-                <!-- 以下是原始版本 -->
-                <%
-                String username = (String) session.getAttribute("username");
-                if (username != null && !username.isEmpty()) {
-                // 如果用戶已經登入，顯示歡迎信息和用戶名
-            %>
-                <input class="btnLogin-popup" type="button" value="歡迎, <%= username %>" "></button>
-            <%
-                } else {
-                // 如果用戶未登入，顯示默認的按鈕文本
-            %>
-                <input class="btnLogin-popup" type="button" value="帳戶" onclick="location.href=''"></button>
-            <%
-                }
-            %>
+            
             
 
             
