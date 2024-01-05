@@ -1,1 +1,1 @@
-[Link to MainPage Login](MainPage.html)
+[Link to MainPage.html](MainPage.html)
