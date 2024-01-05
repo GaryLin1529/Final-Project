@@ -6,12 +6,16 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/rating.css">
     <title>review form</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <!--前導主頁-->
     <header class="header">
         <!--按Logo回主頁-->
-        <a href="../MainPage.html" class="logo"><img class="header-logo" src="img/logo.png"/></a>
+        <a href="../../MainPage Logged In/MainPageLogged.jsp" class="logo"><img class="header-logo" src="img/logo.png"/></a>
 
         <!--搜尋欄-->
         <div class="SearchBar_container">
@@ -22,36 +26,99 @@
         </div>
 
         <nav class="navbar">
-                <a href="../MainPage.html" >主頁面</a>
-                <input class="btnLogin-popup" type="button"  value="帳戶" onclick="location.href='../username/username.html'"></button>
+                <a href="../../MainPage Logged In/MainPageLogged.jsp" >主頁面</a>
         </nav>
     </header>
 
-    <div class="wrapper1">
-        <h3>請留下您寶貴的評論</h3>
-        <form action="#" id="commentForm">
-            <div class="rating" id="starRating">
-                <input type="number" name="rating" hidden>
-                <i class='bx bx-star star' style="--i: 0;"></i>
-                <i class='bx bx-star star' style="--i: 1;"></i>
-                <i class='bx bx-star star' style="--i: 2;"></i>
-                <i class='bx bx-star star' style="--i: 3;"></i>
-                <i class='bx bx-star star' style="--i: 4;"></i>
-             </div>
-             <textarea name="name" id="userName" cols="30" rows="1" placeholder="使用者名字"></textarea>
-             <textarea name="opinion" id="userOpinion" cols="30" rows="7" placeholder="輸入您的意見"></textarea>
-             <div class="btn-group">
-                 <button type="button" class="btn submit" onclick="submitComment()">送出</button>
-             </div>
-         </form>
-     </div>
-     <div class="wrapper1">
-        <h3>歷史評論</h3>
-        <div class="history" id="commentHistory">
-            <!-- 歷史紀錄將顯示在這裡 -->
+
+<script src="js/Login.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+
+<div class="wrapper1">
+    <h3>請留下您寶貴的評論</h3>
+    <form id="commentForm" method="post">
+        <div class="rating" id="starRating">
+            <input type="number" name="rating" hidden>
+            <i class='bx bx-star star' style="--i: 0;"></i>
+            <i class='bx bx-star star' style="--i: 1;"></i>
+            <i class='bx bx-star star' style="--i: 2;"></i>
+            <i class='bx bx-star star' style="--i: 3;"></i>
+            <i class='bx bx-star star' style="--i: 4;"></i>
         </div>
+        <textarea name="userName" id="userName" cols="30" rows="1" placeholder="使用者名字"></textarea>
+        <textarea name="userOpinion" id="userOpinion" cols="30" rows="7" placeholder="輸入您的意見"></textarea>
+        <div class="btn-group">
+            <button type="submit" class="btn" onclick="saveData()">送出</button>
+        </div>
+    </form>
+</div>
+
+<div class="wrapper1">
+    <h3>歷史評論</h3>
+    <div class="history" id="commentHistory">
+        <!-- History will be displayed here -->
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        // Function to load comments from the server
+        function loadComments() {
+            $.ajax({
+                type: "POST", // Change to "GET" if your server requires
+                url: "rating.jsp", // Replace with your JSP file path that returns comment data
+                success: function(response) {
+                    $('#commentHistory').html(response);
+                },
+                error: function() {
+                    $('#commentHistory').html("Error loading reviews.");
+                }
+            });
+        }
+
+        // Load comments when the document is ready
+        loadComments();
+
+        $('#commentForm').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: "POST",
+                url: "rating.jsp", // Replace with your JSP file path
+                data: $(this).serialize(),
+                success: function(response) {
+                    $('#commentHistory').html(response);
+                    // Clear form fields
+                    $('#userName').val('');
+                    $('#userOpinion').val('');
+                },
+                error: function() {
+                    $('#commentHistory').html("Error submitting review.");
+                }
+            });
+        });
+    });
+
+    function saveData() {
+        var userName = $('#userName').val();
+        var userOpinion = $('#userOpinion').val();
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("userOpinion", userOpinion);
+    }
+
+    window.onload = function() {
+        var userName = localStorage.getItem("userName");
+        var userOpinion = localStorage.getItem("userOpinion");
+        if (userName) {
+            $('#userName').val(userName);
+        }
+        if (userOpinion) {
+            $('#userOpinion').val(userOpinion);
+        }
+    };
+</script>
+
     <script src="js/rating.js"></script>
     <script src="js/history.js"></script>
     <script src="js/header.js"></script>

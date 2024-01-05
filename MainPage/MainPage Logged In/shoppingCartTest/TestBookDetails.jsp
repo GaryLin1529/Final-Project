@@ -1,10 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.util.Arrays" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.sql.*" %>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +16,7 @@
     <!--前導主頁-->
     <header class="header">
         <!--按Logo回主頁-->
-        <a href="../../MainPage Logged In/MainPageLogged.jsp" class="logo"><img class="header-logo" src="img/logo.png"/></a>
+        <a href="../../MainPage Logged In/MainPageLogged.jsp" class="logo"><img class="header-logo" src="img/logo.png"/></a>../../MainPage.html
         <!--
         <a href="/MainPage/MainPage Logged In/MainPageLogged.jsp" class="logo"><img class="header-logo" src="img/logo.png"/></a>
         -->
@@ -33,19 +30,19 @@
         </div>
 
         <nav class="navbar">
-                <a href="../../MainPage Logged In/MainPageLogged.jsp">主頁面</a>
+                <a href="../../MainPageLogged.jsp">主頁面</a>
                 <a href="../../MainPage Logged In/Shopping Interface/ShoppingInterface.jsp" >購物車</a>
                 <%
                     String username = (String) session.getAttribute("username");
                     if (username != null && !username.isEmpty()) {
                     // 如果用戶已經登入，顯示歡迎信息和用戶名
                 %>
-                    <input class="btnLogin-popup" type="button" value="歡迎, <%= username %>" onclick="location.href=''"></button>
+                    <input class="btnLogin-popup" type="button" value="歡迎, <%= username %>" onclick="location.href='username/username.html'"></button>
                 <%
                     } else {
                     // 如果用戶未登入，顯示默認的按鈕文本
                 %>
-                    <input class="btnLogin-popup" type="button" value="帳戶" onclick="location.href=''"></button>
+                    <input class="btnLogin-popup" type="button" value="帳戶" onclick="location.href='login.html'"></button>
                 <%
                     }
                 %>
@@ -87,12 +84,14 @@
         <div class="single-pro-details">
                             <h2><%= displayProductName %></h2>
                             <h3> $<%= displayPrice %> </h3> 
-                            <!-- <input type="number" min="0" max= <%= displayQuantity %> value="1"> --> 
-                            <form method="post" action="Shopping Interface/ShoppingInterface.jsp">
+                            <input type="number" min="0" max= <%= displayQuantity %> value="1"> 
+                            <form method="post" action="TestCart.jsp">
                                 <input type="hidden" name="productID" value="<%= productID %>" />
-                                <input type="number" name="quantity" min="0" max="<%= displayQuantity %>" value="1" />
+                                <input type="number" name="quantity" min="1" max="<%= displayQuantity %>" value="1" />
                                 <button type="submit" class="normal" oneclick="alert('已加入購物車')"> 加入購物車 </button>
                             </form>
+
+                            <!-- <button class="normal" onclick="alert('已加入購物車')">加入購物車</button> -->
                             <h5>庫存量: <%= displayQuantity %></h5>
                             <h4>產品詳情</h4>
                             <span>

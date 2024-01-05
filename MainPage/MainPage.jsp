@@ -61,9 +61,9 @@
         <%
             String email = request.getParameter("email");
             String password = request.getParameter("password");
-            String message = null; 
-            boolean isLoggedIn = false; // 確認登入成功與否狀態
-            boolean loginEntered = false; // 確認有無進入登入功能
+            String LoginMessage = null;
+            boolean isInLoggedIn = false; // 確認登入成功與否狀態
+            
 
             if (email != null && password != null && !email.trim().isEmpty() && !password.trim().isEmpty()) {
                 Connection conn = null;
@@ -84,20 +84,20 @@
                     pstmt.setString(2, password);
 
                     rs = pstmt.executeQuery();
-                    loginEntered = true;
+                    isInLoggedIn = true;
 
                     if (rs.next()) {
                         String memberName = rs.getString("MemberName");
                         session.setAttribute("username", rs.getString("MemberName"));
-                        isLoggedIn = true;
+                        LoginMessage = "登入成功 歡迎：" + memberName;
                         response.sendRedirect("MainPage Logged In/MainPageLogged.jsp");
                         return;
                     } else {
-                        message = "帳號或密碼錯誤，請重新輸入！";
+                        LoginMessage = "帳號或密碼錯誤，請重新輸入！";
                         
                     }
                 } catch (Exception e) {
-                    message = "資料庫連接失敗：" + e.getMessage();
+                    LoginMessage = "資料庫連接失敗：" + e.getMessage();
                 } finally {
                     if (rs != null) try { rs.close(); } catch(SQLException e) {}
                     if (pstmt != null) try { pstmt.close(); } catch(SQLException e) {}
@@ -106,7 +106,7 @@
             }
 %>
 
-    <% if (!isLoggedIn) { %>
+    <% if (!isInLoggedIn) { %>
             <div class="form-box login">
                 <h2>登入</h2>
                 <form method="post"> <!-- 使用POST方法提交到當前頁面 -->
@@ -132,10 +132,10 @@
             </div>
     <% } %>
 
-    <% if (message != null && !message.isEmpty() && isLoggedIn == false && loginEntered == true) { %>
-            <script type="text/javascript">
-                alert('<%= message %>'); // 在頁面加載時顯示彈出消息
-            </script>
+    <% if (LoginMessage != null && !LoginMessage.isEmpty() && isInLoggedIn == true) { %>
+        <script type="text/javascript">
+            alert('<%= LoginMessage %>'); // 顯示訊息
+        </script>
     <% } %>
 
     <%
@@ -218,7 +218,7 @@
                 <p>已經擁有帳號了?&nbsp;<a href="#" class="login-link">登入</a></p>
             </div>
         </form>
-        <% if (message != null && !message.isEmpty() && isInRegister == true) { %>
+        <% if (RegisterMessage != null && !RegisterMessage.isEmpty() && isInRegister == true) { %>
         <p><script type="text/javascript">
                 alert('<%= RegisterMessage %>'); // 在頁面加載時顯示彈出消息
             </script>

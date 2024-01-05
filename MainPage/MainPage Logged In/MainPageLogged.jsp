@@ -3,6 +3,7 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="java.sql.*" %>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +35,7 @@
 
         <nav class="navbar">
                 <a href="MainPageLogged.jsp" class="active"\>主頁面</a>
-                <a href="">購物車</a>
+                <a href="BookDetails(Logged In)/Shopping Interface/ShoppingInterface.jsp" >購物車</a>
                 
         <div class="dropdown">
             <button class="dropbtn">
@@ -45,20 +46,30 @@
                     <a href="#Educational">工具書</a>
             </div>
         </div>
+
+            
+                
+
+                <!-- 以上cookie 合併會產生bug問題 -->
+
+                <!-- 以下是原始版本 -->
                 <%
                 String username = (String) session.getAttribute("username");
                 if (username != null && !username.isEmpty()) {
                 // 如果用戶已經登入，顯示歡迎信息和用戶名
             %>
-                <input class="btnLogin-popup" type="button" value="歡迎, <%= username %>" onclick="location.href='username/username.html'"></button>
+                <input class="btnLogin-popup" type="button" value="歡迎, <%= username %>" "></button>
             <%
                 } else {
                 // 如果用戶未登入，顯示默認的按鈕文本
             %>
-                <input class="btnLogin-popup" type="button" value="帳戶" onclick="location.href='login.html'"></button>
+                <input class="btnLogin-popup" type="button" value="帳戶" onclick="location.href=''"></button>
             <%
                 }
             %>
+            
+
+            
         </nav>
 
         <script src="JavaScript/header.js"></script>
