@@ -28,7 +28,7 @@
             } else {
                 while (rs.next()) {
                     // Ensure these are the correct column names from your database
-                    out.println("<p><a href='MainPage/MainPage Logged In/BookDetails(Logged In)/BookDetails.jsp?id=" + rs.getString("ProductID") + "'>" + rs.getString("ProductName") + "</a></p>");
+                    out.println("<p><a href='BookDetails.jsp?ProductID=" + rs.getString("ProductID") + "'>" + rs.getString("ProductName") + "</a></p>");
                 }
             }
         } catch (ClassNotFoundException e) {

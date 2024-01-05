@@ -26,7 +26,7 @@
         
         <!--搜尋欄-->
         <div class="SearchBar_container">
-            <form action="" class="SearchBar">
+            <form action="MainPage Logged In/BookDetails(Logged In)/Search.jsp" class="SearchBar">
                 <input type="text" placeholder="搜尋..." name="question">
                 <button type="submit"><img src="image/search.png"></button>
             </form>
