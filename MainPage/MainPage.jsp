@@ -34,6 +34,7 @@
 
         <nav class="navbar">
                 <a href="MainPage.jsp" class="active"\>主頁面</a>
+                <a href="javascript:alert('🔔 請登入會員後再行購買！🔔')">購物車</a>
                 
         <div class="dropdown">
             <button class="dropbtn">
@@ -84,9 +85,12 @@
                     pstmt.setString(2, password);
 
                     rs = pstmt.executeQuery();
-                    isInLoggedIn = true;
+                    
 
                     if (rs.next()) {
+
+                        isInLoggedIn = true;
+
                         String memberName = rs.getString("MemberName");
                         session.setAttribute("username", rs.getString("MemberName"));
                         LoginMessage = "登入成功 歡迎：" + memberName;
@@ -142,11 +146,11 @@
     String RegisterUsername = request.getParameter("username");
     String RegisterEmail = request.getParameter("email");
     String RegisterPassword = request.getParameter("password");
-    String RegisterPhoneNumber = request.getParameter("phoneNumber");
+    //String RegisterPhoneNumber = request.getParameter("phoneNumber");
     String RegisterMessage = "";
     boolean isInRegister = false; 
 
-    if (RegisterUsername != null && RegisterEmail != null && RegisterPassword != null && RegisterPhoneNumber != null) {
+    if (RegisterUsername != null && RegisterEmail != null && RegisterPassword != null ) { //&& RegisterPhoneNumber != null
         Connection conn = null;
         PreparedStatement pstmt = null;
         PreparedStatement pstmtSelect = null;
@@ -160,12 +164,12 @@
 
             conn = DriverManager.getConnection(url, dbUsername, dbPassword);
 
-            String sql = "INSERT INTO membership (MemberName, MemberAccount, MemberPassword, MemberPhone) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO membership (MemberName, MemberAccount, MemberPassword) VALUES (?, ?, ?)"; // , MemberPhone
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, RegisterUsername);
             pstmt.setString(2, RegisterEmail);
             pstmt.setString(3, RegisterPassword);
-            pstmt.setString(4, RegisterPhoneNumber);
+            //pstmt.setString(4, RegisterPhoneNumber);
 
             int rowsAffected = pstmt.executeUpdate();
 
@@ -205,11 +209,13 @@
                 <input type="password" id="password" name="password" onfocus="this.style.color='#ffff'" required>
                 <label>密碼</label>
             </div>
+            <!--
             <div class="input-box">
                 <span class="icon"><ion-icon name="phoneNumber"></ion-icon></span>
                 <input type="text" id="phoneNumber" name="phoneNumber" onfocus="this.style.color='#ffff'" required>
                 <label>手機號碼</label>
-            </div>    
+            </div> 
+            -->   
             <div class="remeber-forget">
                 <label><input type="checkbox">我同意隱私條款</label>
             </div>

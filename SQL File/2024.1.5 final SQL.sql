@@ -85,9 +85,9 @@ CREATE TABLE `membership` (
   `MemberPassword` varchar(45) NOT NULL,
   `MemberName` varchar(45) NOT NULL,
   `MemberAccount` varchar(45) NOT NULL,
-  `MemberPhone` int NOT NULL,
+  `MemberPhone` int DEFAULT NULL,
   PRIMARY KEY (`MemberID`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +96,7 @@ CREATE TABLE `membership` (
 
 LOCK TABLES `membership` WRITE;
 /*!40000 ALTER TABLE `membership` DISABLE KEYS */;
-INSERT INTO `membership` VALUES (1,'11144209','JayPan','JayPan@gmail.com',955889701),(2,'11144239','Mina','Mina@gmail.com',985476321),(3,'11144275','Nathania','Nathania@gmail.com',957236589),(7,'11144876','John','John@gmail.com',974266873),(8,'11144872','Hank','Hank@gmail.com',954122367),(9,'11144297','Hank','Hank@gmail.com',966522147),(10,'11144559','Paul','Paul@gmail.com',987522317),(11,'11144789','Yale','Yale@gmail.com',955122367),(12,'11144273','Tom','Tom@gmail.com',94412207),(13,'11144369','林黛玉','Yu@gmail.com',955477216),(14,'11144789','薛寶釵','Bow@gmail.com',974266581),(15,'11144203','李白','Li@gmail.com',932468520);
+INSERT INTO `membership` VALUES (1,'11144209','JayPan','JayPan@gmail.com',955889701),(2,'11144239','Mina','Mina@gmail.com',985476321),(3,'11144275','Nathania','Nathania@gmail.com',957236589),(17,'11144789','曹雪芹','Snow@gmail.com',NULL);
 /*!40000 ALTER TABLE `membership` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,7 +121,6 @@ CREATE TABLE `reviews` (
 
 LOCK TABLES `reviews` WRITE;
 /*!40000 ALTER TABLE `reviews` DISABLE KEYS */;
-INSERT INTO `reviews` VALUES (5,'8523','i'),(5,'真棒','JayPan'),(5,'Really Nice','Nat'),(5,'Good!','Paul'),(5,'8523','Queen'),(1,'77777','Yale'),(5,'書中內容還不亞於我堂上樓閣的書呢！','林黛玉');
 /*!40000 ALTER TABLE `reviews` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,4 +194,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-05 20:57:53
+-- Dump completed on 2024-01-05 23:31:50

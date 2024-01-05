@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>書籍簡介</title>
+    <title>黃金屋-書籍簡介</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/details17.css">
 </head>
@@ -34,13 +34,13 @@
 
         <nav class="navbar">
                 <a href="../../MainPage Logged In/MainPageLogged.jsp">主頁面</a>
-                <a href="../../MainPage Logged In/Shopping Interface/ShoppingInterface.jsp" >購物車</a>
+                <a href="Shopping Interface/ShoppingInterface.jsp" >購物車</a>
                 <%
                     String username = (String) session.getAttribute("username");
                     if (username != null && !username.isEmpty()) {
                     // 如果用戶已經登入，顯示歡迎信息和用戶名
                 %>
-                    <input class="btnLogin-popup" type="button" value="歡迎, <%= username %>" onclick="location.href=''"></button>
+                    <input class="btnLogin-popup" type="button" value="歡迎, <%= username %>" onclick="location.href='../MemberDetail/MemberDetail.html'"></button>
                 <%
                     } else {
                     // 如果用戶未登入，顯示默認的按鈕文本
@@ -82,7 +82,7 @@
             %>
 
         <div class="single-pro-image">
-            <img src="bookImg/<%= productID %>.jpg" width="100%" id="MainImg" alt="">
+            <img src="bookImg/<%= productID %>.jpg" width="100%" id="MainImg" style="border-radius: 10px;">
         </div>
         <div class="single-pro-details">
                             <h2><%= displayProductName %></h2>

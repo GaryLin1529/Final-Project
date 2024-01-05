@@ -81,7 +81,7 @@
 
             // 顯示歡迎信息和用戶名
             %>
-                <input class="btnLogin-popup" type="button" value="歡迎  <%= username %>" "></button>
+                <input class="btnLogin-popup" type="button" value="歡迎  <%= username %>" onclick="location.href='MemberDetail/MemberDetail.html' "></button>
             <%
         } else {
             // 如果用戶未登入，顯示默認的按鈕文本
@@ -90,16 +90,10 @@
             <%
         }
 
-%>
+    %>
+    
         </div>
 
-            
-                
-
-            
-            
-
-            
         </nav>
 
         <script src="JavaScript/header.js"></script>

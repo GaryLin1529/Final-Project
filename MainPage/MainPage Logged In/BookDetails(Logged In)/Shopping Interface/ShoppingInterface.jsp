@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShoppingInterface</title>
+    <title>黃金屋-購物車</title>
     <link rel="stylesheet" href="css/ShoppingInterface.css">
     <link rel="stylesheet" href="js/ShoppingInterface.js">
     <link rel="stylesheet" href="css/header.css">
@@ -166,6 +166,23 @@
                         <label for="address">地址</label>
                         <input type="text" name="address" id="address" required>
                     </div>
+
+                    <div class="group">
+                        <label for="">國家</label>
+                        <select type="text" name="" id="">
+                            <option value="">選擇...</option>
+                            <option value="london">台灣</option>
+                            <option value="london">USA</option>
+                        </select>
+                    </div>
+                    <div class="group">
+                        <label for="">城市</label>
+                        <select type="text" name="" id="">
+                            <option value="">選擇...</option>
+                            <option value="london">台北</option>
+                            <option value="london">london</option>
+                        </select>
+
                 </div>
                 <div class="return">
                     <div class="row">
