@@ -1,0 +1,381 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #081b29;
+    margin-top: 10%;
+}
+
+/*網頁標頭樣式*/
+.header {
+    /*使元素固定，即使滾動頁面也不會變位置*/
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding: 5px 10%;
+    /*透明背景*/
+    background: transparent;
+    /*建立一個flex容器*/
+    display: flex;
+    /*為flex屬性之一，可將元素均勻擺在容器空間中*/
+    justify-content: space-between;
+    /*使元素在容器中的XY軸上置中*/
+    align-items: center;
+    /*z-index是疊層概念 數字越大疊層越上面*/
+    z-index: 10;
+    /*發現往下滑時商品會擋住header 故加一點模糊顏色*/
+    background: rgba(8, 27, 41, 0.7);
+    backdrop-filter: blur(4px) saturate(120%);
+    /*同上問題 解決後覺得header出現與消失的動畫太生硬 因此加入淡入淡出效果*/
+    /*淡入淡出的過渡效果，時間為 0.3 秒，使用 ease 函數 */
+    transition: opacity 0.3s ease;
+    /*在頁面最頂端時不透明度為 1，即完全顯示 */
+    opacity: 1;
+}
+
+.header.hidden {
+    opacity: 0;
+    /* 隱藏時的不透明度為 0，即完全透明 */
+}
+
+.header-logo {
+    max-width: 35%;
+    height: auto;
+}
+
+.logo {
+    font-size: 25px;
+    color: #ededed;
+    text-decoration: none;
+    font-weight: 600px;
+}
+
+/*搜尋欄*/
+.SearchBar {
+    width: 100%;
+    max-width: 700px;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    border-radius: 60px;
+    padding: 10px 20px;
+    /*blur(模糊) sturate(飽和度)*/
+    backdrop-filter: blur(4px) saturate(180%);
+}
+
+.SearchBar input {
+    background: transparent;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 10px 10px;
+    font-size: 20px;
+    color: #cac7ff;
+}
+
+::placeholder {
+    color: #cac7ff;
+}
+
+.SearchBar button img {
+    width: 25px;
+}
+
+.SearchBar button {
+    border: 0;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background: #58629b;
+    cursor: pointer;
+}
+
+/*導航欄*/
+.navbar a {
+    font-size: 18px;
+    color: #ededed;
+    text-decoration: none;
+    font-weight: 500px;
+    margin-left: 35px;
+    transition: .3s;
+}
+
+.navbar a::after {
+    /*nav的底線動畫設定*/
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    transform-origin: right;
+    transform: scale(0);
+    transition: transform .5s;
+}
+
+.navbar a:hover::after {
+    /**nav底線的縮放大小與方向設定*/
+    transform: scale(1);
+    transform-origin: left;
+}
+
+.navbar a {
+    /*nav的設定*/
+    position: relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+
+/*Login*/
+.navbar .btnLogin-popup {
+    /*Login按鈕設定*/
+    width: 130px;
+    height: 50px;
+    background: transparent;
+    border: 2px solid #fff;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1em;
+    color: #fff;
+    font-weight: 500;
+    margin-left: 40px;
+    transition: .5s;
+    /*login按鈕變色的時間*/
+}
+
+.navbar .btnLogin-popup:hover {
+    /*login按鈕的變色設定*/
+    background-color: #fff;
+    color: #162938;
+}
+
+
+/* hover是判斷鼠標有無點上去*/
+/*鼠標懸停(hover)在「navbar("a元素")」上時的樣式，*/
+.navbar a:hover,
+/*當.navbar的連結被標記為active(當前選擇or打開的頁面)時的樣式*/
+.navbar a.active {
+    color: #00abf0;
+}
+
+#prodetails {
+    display: flex;
+}
+
+#prodetails .single-pro-image {
+    width: 30%;
+    margin-right: 90px;
+    margin-left: 23%;
+    margin-top: 150px;
+}
+
+
+#prodetails .single-pro-details {
+    width: 50%;
+    margin-top: 100px;
+    padding: 30px 10px;
+}
+
+#prodetails .single-pro-details h5 {
+    margin-top: 10px;
+    color: rgb(209, 200, 200);
+}
+
+#prodetails .single-pro-details h4 {
+    margin-top: 25px;
+    padding: 40px 0 0 0;
+    color: white;
+}
+
+#prodetails .single-pro-details h3 {
+    font-size: 30px;
+    color: white;
+}
+
+#prodetails .single-pro-details h2 {
+    font-size: 40px;
+    margin-top: 20px;
+    color: white;
+}
+
+#prodetails .single-pro-details input {
+    width: 50px;
+    height: 47px;
+    padding-left: 10px;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 10px;
+    margin-top: 30px;
+    border: none;
+    background-color: #F5F5F5;
+}
+
+#prodetails .single-pro-details input:focus {
+    outline: none;
+}
+
+#prodetails .single-pro-details button {
+    background-color: #00abf0;
+    color: white;
+    cursor: pointer;
+    width: 90px;
+    height: 50px;
+    border-radius: 10px;
+    margin-top: 30px;
+    border: none;
+}
+
+#prodetails .single-pro-details button:hover {
+    background-color: #1C3C60;
+}
+
+
+#prodetails .single-pro-details span {
+    line-height: 25px;
+    color: white;
+}
+
+.wrapper {
+    background: #1C3C60;
+    padding: 2rem;
+    max-width: 1000px;
+    width: 100%;
+    border-radius: .75rem;
+    text-align: center;
+    margin: auto;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-color: #F5F5F5;
+    border-style: solid;
+}
+
+.wrapper h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.2rem;
+    color: #FFF;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-gap: .5rem;
+    font-size: 2rem;
+    color: #00abf0;
+    margin-bottom: 2rem;
+}
+
+.rating .star {
+    cursor: pointer;
+}
+
+.rating .star.active {
+    opacity: 0;
+    animation: animate .5s calc(var(--i) * .05s) ease-in-out forwards;
+}
+
+@keyframes animate {
+    0% {
+        opacity: 0;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 3;
+        transform: scale(1);
+    }
+}
+
+.rating .star:hover {
+    transform: scale(1.1);
+}
+
+textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: .5rem;
+    border: none;
+    outline: none;
+    resize: none;
+    margin-bottom: .75rem;
+    color: #fff;
+}
+
+.btn-group {
+    display: flex;
+    grid-gap: .5rem;
+    align-items: center;
+    margin-left: 47%;
+}
+
+.btn-group .btn {
+    padding: 1rem 1.5rem;
+    border-radius: .5rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: .875rem;
+    font-weight: 500;
+}
+
+.btn-group .btn.submit {
+    background: #00abf0;
+    color: #FAF9F6;
+}
+
+.btn-group .btn.submit:hover {
+    background: #081b29;
+}
+
+.history {
+    border: 1px solid #ddd;
+    padding: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: .75rem;
+}
+
+.comment-entry {
+    display: flex;
+    /* Use flexbox for layout */
+    flex-direction: column;
+    /* Arrange child elements in a column */
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    align-items: flex-start;
+    color: #fff;
+    /* Align items to the start (left) */
+}
+
+.comment-entry .stars {
+    margin-bottom: 5px;
+    color: #00abf0;
+    font-size: 2rem;
+}
+
+#commentHistory {
+    color: black;
+}
