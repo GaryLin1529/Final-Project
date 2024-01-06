@@ -63,12 +63,12 @@
             <h1>我的購物車</h1>
 
             <%
-                // 检查是否有新加入购物车的产品
+                // 檢查是否有新加入購物車的產品
                 String newProductId = request.getParameter("productID");
                 String newQuantity = request.getParameter("quantity");
 
                 if (newProductId != null && !newProductId.isEmpty()) {
-                    // 将新加入的产品添加到购物车
+                    // 將新加入的產品添加到購物車
                     ArrayList<String> cart = (ArrayList<String>) session.getAttribute("cart");
                     if (cart == null) {
                         cart = new ArrayList<String>();
@@ -80,8 +80,10 @@
                 int totalQuantity = 0; // 總書本數量
                 int totalPrice = 0; // 總價格
 
+                // 將購物車陣列資料與資料庫比對
                 ArrayList<String> cart = (ArrayList<String>) session.getAttribute("cart");
                 if (cart != null && !cart.isEmpty()) {
+                    // 依照比對資料提取資料庫資料
                     Connection ProductConn = null;
                     PreparedStatement ProductPstmt = null;
                     ResultSet ProductRs = null;
@@ -91,7 +93,7 @@
                         for (String item : cart) {
                             String[] parts = item.split(":");
                             String productId = parts[0];
-                            int quantity = parts.length > 1 ? Integer.parseInt(parts[1]) : 1; // 默认数量为1
+                            int quantity = parts.length > 1 ? Integer.parseInt(parts[1]) : 1; // 先默認數量為1
 
                             String sql = "SELECT ProductName, Price FROM inventoryquantity WHERE ProductID = ?";
                             ProductPstmt = ProductConn.prepareStatement(sql);
@@ -100,17 +102,11 @@
                             if (ProductRs.next()) {
                                 String productName = ProductRs.getString("ProductName");
                                 int price = ProductRs.getInt("Price");
-
-                                /*
-                                totalQuantity = totalQuantity + quantity; // 累加总数量
-                                totalPrice = totalPrice + EachReturnPrice; // 累加总价格
-                                */
-
                                 %>
 
                                 <div class="list">
 
-                                    <!-- 商品1 -->
+                                    <!-- 商品訂單陳列 -->
                                     <div class="item">
                                         <img src="bookImg/<%= productId %>.jpg" alt="">
                                         <div class="info">
@@ -121,10 +117,10 @@
                                         <div class="returnPrice">
                                             <%
                                                 
-                                                int EachReturnPrice = price * quantity;
+                                                int EachReturnPrice = price * quantity; // 每一項所購買書籍的價格回算
 
-                                                totalQuantity = totalQuantity + quantity; // 累加总数量
-                                                totalPrice = totalPrice + EachReturnPrice; // 累加总价格
+                                                totalQuantity = totalQuantity + quantity; // 累加總數量
+                                                totalPrice = totalPrice + EachReturnPrice; // 累加總價格
                                             %>
                                         $ <%= EachReturnPrice %>
                                         </div>
@@ -151,6 +147,9 @@
         </div>
 
         <div class="right">
+
+            <!-- 結帳功能區 -->
+
             <h1>結帳</h1>
             <form action="CheckoutProcess.jsp" method="post">
                 <div class="form">

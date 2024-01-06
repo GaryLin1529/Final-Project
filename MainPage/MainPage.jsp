@@ -59,6 +59,7 @@
         <ion-icon name="close"></ion-icon>
     </span>
 
+        <!-- 登入流程 -->
         <%
             String email = request.getParameter("email");
             String password = request.getParameter("password");
@@ -142,11 +143,13 @@
         </script>
     <% } %>
 
+
+    <!-- 註冊流程 -->
     <%
     String RegisterUsername = request.getParameter("username");
     String RegisterEmail = request.getParameter("email");
     String RegisterPassword = request.getParameter("password");
-    //String RegisterPhoneNumber = request.getParameter("phoneNumber");
+    //String RegisterPhoneNumber = request.getParameter("phoneNumber"); // 先保留註冊手機用的code，保未來可用到
     String RegisterMessage = "";
     boolean isInRegister = false; 
 
@@ -252,7 +255,7 @@
         </div>
     </div>
 
-    <!--滾動式廣告-->
+    <!-- 滾動式廣告 - 新品推出 -->
     <div class="slideshow-container">
         <div class="singleslide fade">
             <a href="#" onclick="showLoginAlert()" > <!-- 如可以點擊，則顯示登入後再購買訊息 -->
@@ -305,7 +308,7 @@
                 Connection NewProductConn = null;
                 PreparedStatement NewProductPstmt = null;
                 ResultSet NewProductRs = null;
-                int imgNewProductNum = 1; // Initialize the image counter before the loop
+                int imgNewProductNum = 1; // 初始化新品項目之圖片標號
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     String url = "jdbc:mysql://localhost:3306/transactionthing";
@@ -323,7 +326,7 @@
                         String author = NewProductRs.getString("BookAuthor");
                         int price = NewProductRs.getInt("Price");
             %>
-            <!--商品 新品-->
+            <!-- 商品 新品 - 列印出產品結果 -->
                 <div class="pro">
                     <img src="image/new(<%= imgNewProductNum %>).jpg" alt="">
                     <div class="des">
@@ -339,14 +342,14 @@
                         <h4>$<%= price %></h4>
                     </div>
 
-                    <!-- 第二個購物車登入按鈕 -->
+                    <!-- 購物車登入按鈕 -->
 
                     <a href="#" onclick="showLoginAlert()" ><i class="fas fa-shopping-cart cart"></i></a>
                     
                 </div>
                 
             <%
-                        imgNewProductNum++; // Increment the image counter after each book
+                        imgNewProductNum++; // 在while執行完一次一個產品印出後，增加圖片編號+1
                     }
                 } catch(Exception e) {
                     out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");
@@ -375,7 +378,7 @@
                 Connection LiteraturetConn = null;
                 PreparedStatement LiteraturetPstmt = null;
                 ResultSet LiteratureRs = null;
-                int imgLiteratureNum = 1; // Initialize the image counter before the loop
+                int imgLiteratureNum = 1; // 初始化文學項目之圖片標號
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     String url = "jdbc:mysql://localhost:3306/transactionthing";
@@ -411,7 +414,7 @@
             </div>
 
             <%
-                        imgLiteratureNum++; // Increment the image counter after each book
+                        imgLiteratureNum++; 
                     }
                 } catch(Exception e) {
                     out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");
@@ -444,7 +447,7 @@
                 Connection EduConn = null;
                 PreparedStatement EduPstmt = null;
                 ResultSet EduRs = null;
-                int imgEduNum = 1; // Initialize the image counter before the loop
+                int imgEduNum = 1; // 初始化教育工具書項目之圖片標號
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     String url = "jdbc:mysql://localhost:3306/transactionthing";
@@ -480,7 +483,7 @@
             </div>
 
             <%
-                        imgEduNum++; // Increment the image counter after each book
+                        imgEduNum++; 
                     }
                 } catch(Exception e) {
                     out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");
@@ -503,7 +506,7 @@
 
 
 <footer>
-    <!--團隊介紹-->
+    <!-- 團隊介紹與心得區 -->
 
     <div class="Us_container">
         <div class="Us_header">

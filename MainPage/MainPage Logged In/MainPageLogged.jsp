@@ -47,7 +47,8 @@
             </div>
 
     <%
-        // Declare and initialize username here
+        // 接收來自MainPage.jsp的帳戶登入後的username資料，並增加cookie功能
+
         String username = (String) session.getAttribute("username");
         boolean isReturningUser = false;
 
@@ -66,7 +67,7 @@
                 }
             }
 
-        // Cookie creation and notification code
+        // cookie建立與顯示cookie通知
         if (username != null && !username.isEmpty()) {
             // 如果用戶已經登入
             if (!cookieAlertShown) {
@@ -74,7 +75,7 @@
                 userCookie.setMaxAge(24 * 60 * 60); // Expires in 1 day
                 response.addCookie(userCookie);
 
-                // Show alert and set flag
+                // 顯示cookie通知
                 out.println("<script type='text/javascript'>alert('我們使用 cookies 以增強您的體驗。');</script>");
                 session.setAttribute("cookieAlertShown", true);
             }
@@ -117,6 +118,9 @@
     <div class="slideshow-container">
         <!-- 商品列表從資料庫動態生成 -->
             <%
+
+                // 資料庫處理流程
+
                 Connection RollProductConn = null;
                 PreparedStatement RollProductPstmt = null;
                 ResultSet RollProductRs = null;
@@ -200,7 +204,7 @@
                 Connection NewProductConn = null;
                 PreparedStatement NewProductPstmt = null;
                 ResultSet NewProductRs = null;
-                int imgNewProductNum = 1; // Initialize the image counter before the loop
+                int imgNewProductNum = 1; // 初始化新品項目之圖片標號
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     String url = "jdbc:mysql://localhost:3306/transactionthing";
@@ -238,7 +242,7 @@
                 </div>
                 
             <%
-                        imgNewProductNum++; // Increment the image counter after each book
+                        imgNewProductNum++; // 增加新品項目圖片標號+1
                     }
                 } catch(Exception e) {
                     out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");
@@ -260,7 +264,7 @@
                 Connection LiteraturetConn = null;
                 PreparedStatement LiteraturetPstmt = null;
                 ResultSet LiteratureRs = null;
-                int imgLiteratureNum = 1; // Initialize the image counter before the loop
+                int imgLiteratureNum = 1; // 初始化文學項目之圖片標號
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     String url = "jdbc:mysql://localhost:3306/transactionthing";
@@ -296,7 +300,7 @@
             </div>
 
             <%
-                        imgLiteratureNum++; // Increment the image counter after each book
+                        imgLiteratureNum++; 
                     }
                 } catch(Exception e) {
                     out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");
@@ -321,7 +325,7 @@
                 Connection EduConn = null;
                 PreparedStatement EduPstmt = null;
                 ResultSet EduRs = null;
-                int imgEduNum = 1; // Initialize the image counter before the loop
+                int imgEduNum = 1; // 初始化教育工具書項目之圖片標號
                 try {
                     Class.forName("com.mysql.cj.jdbc.Driver");
                     String url = "jdbc:mysql://localhost:3306/transactionthing";
@@ -357,7 +361,7 @@
             </div>
 
             <%
-                        imgEduNum++; // Increment the image counter after each book
+                        imgEduNum++; 
                     }
                 } catch(Exception e) {
                     out.println("<p>資料庫連接失敗：" + e.getMessage() + "</p>");

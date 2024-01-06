@@ -20,9 +20,6 @@
     <header class="header">
         <!--按Logo回主頁-->
         <a href="../../MainPage Logged In/MainPageLogged.jsp" class="logo"><img class="header-logo" src="img/logo.png"/></a>
-        <!--
-        <a href="/MainPage/MainPage Logged In/MainPageLogged.jsp" class="logo"><img class="header-logo" src="img/logo.png"/></a>
-        -->
 
         <!--搜尋欄-->
         <div class="SearchBar_container">
@@ -53,7 +50,10 @@
     </header>
     <section id="prodetails" class="section-p1">
 
-        <%
+            <%
+
+                // 由上一個MainPageLogged.jsp獲取的productID，而與資料庫對比輸出之書籍資料
+
                 Connection conn = null;
                 PreparedStatement pstmt = null;
                 ResultSet rs = null;
@@ -81,25 +81,33 @@
                             int displayPrice = rs.getInt("Price");
             %>
 
-        <div class="single-pro-image">
-            <img src="bookImg/<%= productID %>.jpg" width="100%" id="MainImg" style="border-radius: 10px;">
-        </div>
-        <div class="single-pro-details">
+                <div class="single-pro-image">
+                    <img src="bookImg/<%= productID %>.jpg" width="100%" id="MainImg" style="border-radius: 10px;">
+                </div>
+                
+                    <div class="single-pro-details">
+
+                            <!-- 產品名稱標題與價格顯示 -->
+
                             <h2><%= displayProductName %></h2>
                             <h3> $<%= displayPrice %> </h3> 
-                            <!-- <input type="number" min="0" max= <%= displayQuantity %> value="1"> --> 
+
+                            <!-- 進行加入購物車表單的提送 -->
                             <form method="post" action="Shopping Interface/ShoppingInterface.jsp">
                                 <input type="hidden" name="productID" value="<%= productID %>" />
                                 <input type="number" name="quantity" min="0" max="<%= displayQuantity %>" value="1" />
                                 <button type="submit" class="normal" oneclick="alert('已加入購物車')"> 加入購物車 </button>
                             </form>
+
+                            <!-- 基本資料陳列 -->
+
                             <h5>庫存量: <%= displayQuantity %></h5>
                             <h4>產品詳情</h4>
                             <span>
                                 作者: <%= displayAuthor %><br>
                                 譯者: <%= displayTranslator %><br>
                                 語言: <%= displayLanguage %><br>
-                                供應商(出版社): <%= displaySupplier %> <!-- 這裡您可能需要進一步處理以顯示供應商名稱而不是ID -->
+                                供應商(出版社): <%= displaySupplier %> 
                             </span>
                             
             <%
@@ -117,8 +125,13 @@
                     }
                 }
             %>
+                </div>
     </section>
+
     <div class="wrapper">
+    
+        <!-- 以下評論區尚未有功能 -->
+
         <h3>請留下您寶貴的評論</h3>
         <form action="#" id="commentForm">
             <div class="rating" id="starRating">
